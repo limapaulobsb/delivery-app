@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      customer_id: {
+      user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -32,16 +32,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DECIMAL(11, 2),
       },
+      date: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
       delivery_address: {
         allowNull: false,
         type: Sequelize.STRING(100),
       },
-      sale_date: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
       status: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(20),
       },
     });
   },

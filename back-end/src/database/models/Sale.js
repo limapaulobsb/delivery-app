@@ -2,12 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
     'Sale',
     {
-      customerId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
       sellerId: DataTypes.INTEGER,
       totalPrice: DataTypes.DECIMAL(11, 2),
+      date: DataTypes.DATE,
       deliveryAddress: DataTypes.STRING(100),
-      saleDate: DataTypes.DATE,
-      status: DataTypes.STRING(50),
+      status: DataTypes.STRING(20),
     },
     {
       tableName: 'Sales',
@@ -17,10 +17,9 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { as: 'customer', foreignKey: 'customer_id' });
-    Sale.belongsTo(models.User, { as: 'seller', foreignKey: 'seller_id' });
+    Sale.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
+    Sale.belongsTo(models.Seller, { as: 'seller', foreignKey: 'seller_id' });
   };
 
   return Sale;
 };
-

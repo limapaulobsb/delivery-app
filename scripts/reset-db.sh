@@ -1,7 +1,7 @@
 #!/bin/bash
 
 reset_db () {
-  printf '> Starting database reset\n\n'
+  printf '> Starting database reset\n'
 
   cd ./back-end
 

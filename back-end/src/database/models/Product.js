@@ -2,9 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define(
     'Product',
     {
-      name: DataTypes.STRING(100),
-      price: DataTypes.DECIMAL(5, 2),
-      imageUrl: DataTypes.STRING(200),
+      sellerId: DataTypes.INTEGER,
+      name: DataTypes.STRING(50),
+      price: DataTypes.DECIMAL(8, 2),
+      imageUrl: DataTypes.STRING,
     },
     {
       tableName: 'Products',
@@ -12,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  Product.associate = (models) => {
+    Product.belongsTo(models.Seller, { as: 'seller', foreignKey: 'seller_id' });
+  };
 
   return Product;
 };

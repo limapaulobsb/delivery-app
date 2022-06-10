@@ -8,17 +8,27 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      seller_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Sellers',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(50),
       },
       price: {
         allowNull: false,
-        type: Sequelize.DECIMAL(5, 2),
+        type: Sequelize.DECIMAL(8, 2),
       },
       image_url: {
         allowNull: false,
-        type: Sequelize.STRING(200),
+        type: Sequelize.STRING,
       },
     });
   },
