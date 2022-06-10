@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Seller.associate = (models) => {
     Seller.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
-    Seller.hasMany(models.Sale, { as: 'seller', foreignKey: 'seller_id' });
+    Seller.hasMany(models.Sale);
   };
 
   return Seller;

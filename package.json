@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:reset": "./scripts/reset-db.sh",
+    "db:reset": "./scripts/db-reset.sh",
+    "back:prestart": "./scripts/back-prestart.sh",
+    "back:start": "./scripts/back-start.sh",
     "prestart": "./scripts/prestart.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,6 +1,5 @@
 #!/bin/bash
-
-reset_db () {
+db_reset () {
   printf '> Starting database reset\n'
 
   cd ./back-end
@@ -13,4 +12,4 @@ reset_db () {
   printf '\n> Script ended\n\n'
 }
 
-reset_db
+db_reset
