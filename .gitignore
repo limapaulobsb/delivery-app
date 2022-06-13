@@ -1,7 +1,13 @@
-# Dependency directories
+# dependencies
 node_modules/
 jspm_packages/
 
-# dotenv environment variables file
+# testing
+coverage/
+
+# production
+build/
+
+# misc
 .env
 .env.test

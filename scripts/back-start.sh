@@ -5,7 +5,6 @@ back_start () {
   cd ./back-end
 
   npm run dev
-  
 }
 
 back_start

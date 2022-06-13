@@ -7,8 +7,8 @@
     "db:reset": "./scripts/db-reset.sh",
     "back:prestart": "./scripts/back-prestart.sh",
     "back:start": "./scripts/back-start.sh",
-    "prestart": "./scripts/prestart.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "front:start": "./scripts/front-start.sh",
+    "packages:install": "./scripts/packages-install.sh"
   },
   "repository": {
     "type": "git",
