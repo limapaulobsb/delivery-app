@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
       password: req.body.password,
       name: req.body.name,
     };
-    const id = await service.create(payload);
+    const { id } = await service.create(payload);
     return res.status(201).json({ id });
   } catch (error) {
     next(error);
@@ -78,8 +78,6 @@ const update = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 module.exports = {
   changeRole,

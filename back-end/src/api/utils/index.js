@@ -2,9 +2,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 function getSecret() {
-  return fs
-    .readFileSync(`${process.cwd()}/jwt.evaluation.key`, { encoding: 'utf-8' })
-    .trim();
+  return fs.readFileSync(`${process.cwd()}/jwt.evaluation.key`, { encoding: 'utf-8' }).trim();
 }
 
 function createToken(payload) {

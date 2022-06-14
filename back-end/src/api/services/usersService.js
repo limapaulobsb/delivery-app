@@ -25,18 +25,17 @@ const verify = {
   },
 
   fields: (fields) => {
-    const isKey = (field) => Object.keys(fields).includes(field);
     const { email, password, name, role } = fields;
-    if (isKey('email') && !(email && /\S+@\S+\.\S+/.test(email))) {
+    if ('email' in fields && !(email && /\S+@\S+\.\S+/.test(email))) {
       throw new Error('Invalid email');
     }
-    if (isKey('password') && !(password && password.length >= 6)) {
+    if ('password' in fields && !(password && password.length >= 6)) {
       throw new Error('Invalid password');
     }
-    if (isKey('name') && !(name && name.length >= 6)) {
+    if ('name' in fields && !(name && name.length >= 6)) {
       throw new Error('Invalid name');
     }
-    if (isKey('role') && !['customer', 'seller', 'admin'].includes(role)) {
+    if ('role' in fields && !['customer', 'seller', 'admin'].includes(role)) {
       throw new Error('Invalid role');
     }
   },
@@ -60,7 +59,8 @@ const verify = {
 const changeRole = async (id, role) => {
   verify.fields({ role });
   await verify.userExists([{ id }]);
-  return User.update({ role }, { where: { id } });
+  await User.update({ role }, { where: { id } });
+  return true;
 };
 
 const create = async (payload) => {
@@ -68,8 +68,7 @@ const create = async (payload) => {
   verify.fields({ email, password, name });
   await verify.userDoesNotExist([{ name }, { email }]);
   const hash = md5(password);
-  const { id } = await User.create({ email, password: hash, name });
-  return id;
+  return User.create({ email, password: hash, name });
 };
 
 const destroy = async (id) => {
@@ -95,8 +94,6 @@ const update = async (id, payload) => {
   const hash = md5(password);
   return User.update({ email, password: hash, name }, { where: { id } });
 };
-
-
 
 module.exports = {
   changeRole,

@@ -14,9 +14,9 @@ const statusCodes = {
 
 // eslint-disable-next-line no-unused-vars
 function errorMiddleware(err, _req, res, _next) {
-  console.log(err);
   const statusCode = statusCodes[err.message];
   if (statusCode) return res.status(statusCode).json({ message: err.message });
+  console.log(err);
   return res.status(500).json({ message: 'Internal error' });
 }
 
