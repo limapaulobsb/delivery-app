@@ -24,19 +24,11 @@ const verify = {
     return user;
   },
 
-  fields: (fields) => {
-    const { email, password, name, role } = fields;
-    if ('email' in fields && !(email && /\S+@\S+\.\S+/.test(email))) {
-      throw new Error('Invalid email');
-    }
-    if ('password' in fields && !(password && password.length >= 6)) {
-      throw new Error('Invalid password');
-    }
-    if ('name' in fields && !(name && name.length >= 6)) {
-      throw new Error('Invalid name');
-    }
-    if ('role' in fields && !['customer', 'seller', 'admin'].includes(role)) {
-      throw new Error('Invalid role');
+  fields: (...fields) => {
+    for (const field of fields) {
+      if (!field) {
+        throw new Error('All fields must be filled');
+      }
     }
   },
 
@@ -57,7 +49,7 @@ const verify = {
 };
 
 const changeRole = async (id, role) => {
-  verify.fields({ role });
+  verify.fields(role);
   await verify.userExists([{ id }]);
   await User.update({ role }, { where: { id } });
   return true;
@@ -65,7 +57,7 @@ const changeRole = async (id, role) => {
 
 const create = async (payload) => {
   const { email, password, name } = payload;
-  verify.fields(payload);
+  verify.fields(email, password, name);
   await verify.userDoesNotExist([{ name }, { email }]);
   const hash = md5(password);
   return User.create({ email, password: hash, name });
@@ -89,7 +81,7 @@ const login = async (email, password) => {
 
 const update = async (id, payload) => {
   const { email, password, name } = payload;
-  verify.fields(payload);
+  verify.fields(email, password, name);
   await verify.userExists([{ id }]);
   const hash = md5(password);
   return User.update({ email, password: hash, name }, { where: { id } });

@@ -1,10 +1,12 @@
 const statusCodes = {
+  'All fields must be filled': 400,
   'Invalid category': 400,
   'Invalid email': 400,
   'Invalid image URL': 400,
   'Invalid name': 400,
   'Invalid password': 400,
   'Invalid role': 400,
+  'Invalid user': 400,
   'Wrong credentials': 400,
   'Token expired': 401,
   'Token validation failed': 401,
