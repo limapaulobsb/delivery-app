@@ -18,17 +18,17 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      category: {
-        allowNull: false,
-        type: Sequelize.STRING(20),
-      },
       name: {
         allowNull: false,
         type: Sequelize.STRING(50),
       },
-      image_url: {
+      category: {
         allowNull: false,
+        type: Sequelize.STRING(20),
+      },
+      image_url: {
         type: Sequelize.STRING,
+        defaultValue: 'http://localhost:3001/images/NotFound.png',
       },
     });
   },

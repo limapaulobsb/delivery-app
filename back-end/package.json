@@ -5,8 +5,9 @@
   "main": "./src/api/server.js",
   "scripts": {
     "start": "node .",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "dev": "nodemon .",
-    "tests": "mocha ./src/tests/**/*$NAME*.test.js --exit"
+    "tests": "mocha ./src/tests/*.test.js --exit"
   },
   "keywords": [],
   "author": "",

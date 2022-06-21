@@ -1,5 +1,7 @@
 const statusCodes = {
+  'Invalid category': 400,
   'Invalid email': 400,
+  'Invalid image URL': 400,
   'Invalid name': 400,
   'Invalid password': 400,
   'Invalid role': 400,
@@ -7,8 +9,10 @@ const statusCodes = {
   'Token expired': 401,
   'Token validation failed': 401,
   'Forbidden access': 403,
+  'Seller not found': 404,
   'Token not found': 404,
   'User not found': 404,
+  'Seller already exists': 409,
   'User already exists': 409,
 };
 

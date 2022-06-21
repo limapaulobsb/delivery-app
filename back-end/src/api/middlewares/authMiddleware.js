@@ -1,33 +1,62 @@
 const { verifyToken } = require('../utils');
+const { Seller } = require('../../database/models');
 
-function authMiddleware(req, _res, next) {
+async function authMiddleware(req, _res, next) {
   try {
     // Validation of the JWT passed in the request
     req.session = verifyToken(req.headers.token);
-    
-    // Authorization conditions check depending on the route
-    const { path } = req.route;
-    const { id: sessionId, role } = req.session;
-    const targetId = Number(req.params.id);
-    const verifyAuthorization = (condition) => {
-      if (!condition) {
-        next(new Error('Forbidden access'));
-      } else {
-        next();
-      }
-    };
 
+    // Authorization conditions check depending on the route
+    const {
+      method,
+      route: { path },
+      session: { id: sessionId, role },
+    } = req;
+
+    const targetId = Number(req.params.id);
+
+    let permissions = {};
     switch (path) {
+      case '/sellers/:id': {
+        const seller = await Seller.findByPk(targetId);
+        permissions = {
+          PUT: sessionId === seller?.userId,
+          DELETE: sessionId === seller?.userId,
+        };
+        break;
+      }
+      case '/sellers':
+        permissions = {
+          POST: 0,
+        };
+        break;
       case '/users/:id/role':
+        permissions = {
+          PATCH: 0,
+        };
+        break;
       case '/users':
-        verifyAuthorization(role === 'admin');
+        permissions = {
+          GET: sessionId === targetId,
+        };
         break;
       case '/users/:id':
-        verifyAuthorization(sessionId === targetId || role === 'admin');
+        permissions = {
+          GET: sessionId === targetId,
+          PUT: sessionId === targetId,
+          DELETE: sessionId === targetId,
+        };
         break;
       default:
-        next();
         break;
+    }
+
+    const condition = permissions[method] ?? 1;
+
+    if (condition || role === 'admin') {
+      next();
+    } else {
+      next(new Error('Forbidden access'));
     }
   } catch (error) {
     // JWT validation can generate these errors

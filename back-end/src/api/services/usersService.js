@@ -65,7 +65,7 @@ const changeRole = async (id, role) => {
 
 const create = async (payload) => {
   const { email, password, name } = payload;
-  verify.fields({ email, password, name });
+  verify.fields(payload);
   await verify.userDoesNotExist([{ name }, { email }]);
   const hash = md5(password);
   return User.create({ email, password: hash, name });
@@ -89,7 +89,7 @@ const login = async (email, password) => {
 
 const update = async (id, payload) => {
   const { email, password, name } = payload;
-  verify.fields({ email, password, name });
+  verify.fields(payload);
   await verify.userExists([{ id }]);
   const hash = md5(password);
   return User.update({ email, password: hash, name }, { where: { id } });

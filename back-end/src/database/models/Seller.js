@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     'Seller',
     {
       userId: DataTypes.INTEGER,
-      category: DataTypes.STRING(20),
       name: DataTypes.STRING(50),
+      category: DataTypes.STRING(20),
       imageUrl: DataTypes.STRING,
     },
     {
@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Seller.associate = (models) => {
-    Seller.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
-    Seller.hasMany(models.Sale);
+    Seller.belongsTo(models.User, { foreignKey: 'userId' });
+    Seller.hasMany(models.Sale, { foreignKey: 'sellerId' });
   };
 
   return Seller;

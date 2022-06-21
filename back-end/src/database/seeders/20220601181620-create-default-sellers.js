@@ -4,8 +4,8 @@ module.exports = {
     return queryInterface.bulkInsert('Sellers', [
       {
         user_id: 3,
-        category: 'Bebidas',
         name: 'Distribuidora de bebidas',
+        category: 'Bebidas',
         image_url: 'http://localhost:3001/images/NotFound.png',
       },
     ]);
