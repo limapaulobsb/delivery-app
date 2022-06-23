@@ -1,5 +1,5 @@
 const { verifyToken } = require('../utils');
-const { Seller } = require('../../database/models');
+const { Product, Seller } = require('../../database/models');
 
 async function authMiddleware(req, _res, next) {
   try {
@@ -7,20 +7,34 @@ async function authMiddleware(req, _res, next) {
     req.session = verifyToken(req.headers.token);
 
     // Authorization conditions check depending on the route
-    const {
-      method,
-      route: { path },
-      session: { id: sessionId, role },
-    } = req;
-
-    const targetId = Number(req.params.id);
-
+    const { body, method } = req;
+    const { path } = req.route;
+    const { id: sessionId, role } = req.session;
+    const paramsId = Number(req.params.id);
     let permissions = {};
+
     switch (path) {
+      case '/products/:id': {
+        const product = await Product.findByPk(paramsId, { include: Seller });
+        permissions = {
+          PUT: sessionId === product?.Seller.userId,
+          PATCH: 0,
+          DELETE: sessionId === product?.Seller.userId,
+        };
+        break;
+      }
+      case '/products': {
+        const seller = await Seller.findByPk(body.sellerId);
+        permissions = {
+          POST: sessionId === seller?.userId,
+        };
+        break;
+      }
       case '/sellers/:id': {
-        const seller = await Seller.findByPk(targetId);
+        const seller = await Seller.findByPk(paramsId);
         permissions = {
           PUT: sessionId === seller?.userId,
+          PATCH: 0,
           DELETE: sessionId === seller?.userId,
         };
         break;
@@ -30,21 +44,17 @@ async function authMiddleware(req, _res, next) {
           POST: 0,
         };
         break;
-      case '/users/:id/role':
+      case '/users/:id':
         permissions = {
+          GET: sessionId === paramsId,
+          PUT: sessionId === paramsId,
           PATCH: 0,
+          DELETE: sessionId === paramsId,
         };
         break;
       case '/users':
         permissions = {
-          GET: sessionId === targetId,
-        };
-        break;
-      case '/users/:id':
-        permissions = {
-          GET: sessionId === targetId,
-          PUT: sessionId === targetId,
-          DELETE: sessionId === targetId,
+          GET: 0,
         };
         break;
       default:

@@ -6,7 +6,6 @@ module.exports = {
         user_id: 3,
         name: 'Distribuidora de bebidas',
         category: 'Bebidas',
-        image_url: 'http://localhost:3001/images/NotFound.png',
       },
     ]);
   },

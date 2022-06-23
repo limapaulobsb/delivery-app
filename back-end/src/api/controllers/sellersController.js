@@ -1,5 +1,16 @@
 const service = require('../services/sellersService');
 
+const changeUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body;
+    await service.changeUser(id, userId);
+    return res.status(200).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const payload = {
@@ -60,6 +71,7 @@ const update = async (req, res, next) => {
 };
 
 module.exports = {
+  changeUser,
   create,
   destroy,
   findAll,

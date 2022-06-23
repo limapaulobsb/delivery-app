@@ -27,8 +27,8 @@ module.exports = {
         type: Sequelize.DECIMAL(8, 2),
       },
       image_url: {
-        allowNull: false,
         type: Sequelize.STRING,
+        defaultValue: 'http://localhost:3001/images/NotFound.png',
       },
     });
   },

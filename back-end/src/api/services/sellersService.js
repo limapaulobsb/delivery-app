@@ -1,25 +1,10 @@
 const { Seller, User } = require('../../database/models');
 
 const verify = {
-  fields: (...fields) => {
-    for (const field of fields) {
-      if (!field) {
-        throw new Error('All fields must be filled');
-      }
-    }
-  },
-
-  userRole: async (id) => {
-    const user = await User.findByPk(id);
-    if (user?.role !== 'seller') {
-      throw new Error('Invalid user');
-    }
-  },
-
   sellerDoesNotExist: async (name) => {
     const seller = await Seller.findOne({ where: { name } });
     if (seller) {
-      throw new Error('Seller already exists');
+      throw new Error('Name already used');
     }
   },
 
@@ -30,13 +15,25 @@ const verify = {
     }
     return seller;
   },
+
+  userRole: async (userId) => {
+    const user = await User.findByPk(userId);
+    if (user?.role !== 'seller') {
+      throw new Error('Invalid user');
+    }
+  },
+};
+
+const changeUser = async (id, userId) => {
+  await verify.sellerExists(id);
+  await verify.userRole(userId);
+  return Seller.update({ userId }, { where: { id } });
 };
 
 const create = async (payload) => {
   const { userId, name, category, imageUrl } = payload;
-  verify.fields(userId, name, category);
-  await verify.userRole(userId);
   await verify.sellerDoesNotExist(name);
+  await verify.userRole(userId);
   return Seller.create({ userId, name, category, imageUrl });
 };
 
@@ -51,12 +48,15 @@ const findSeller = async (id) => verify.sellerExists(id);
 
 const update = async (id, payload) => {
   const { name, category, imageUrl } = payload;
-  verify.fields(name, category);
-  await verify.sellerExists(id);
+  const seller = await verify.sellerExists(id);
+  if (name !== seller.name) {
+    await verify.sellerDoesNotExist(name);
+  }
   return Seller.update({ name, category, imageUrl }, { where: { id } });
 };
 
 module.exports = {
+  changeUser,
   create,
   destroy,
   findAll,

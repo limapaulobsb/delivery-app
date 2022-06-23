@@ -1,31 +1,57 @@
-function validationMiddleware({ body }, _res, next) {
-  const { category, email, imageUrl, name, password, role } = body;
+const validations = {
+  '/products/:id': {
+    PUT: ['name', 'price', 'imageUrl'],
+  },
+  '/products': {
+    POST: ['name', 'price', 'imageUrl'],
+  },
+  '/sellers/:id': {
+    PUT: ['name', 'category', 'imageUrl'],
+  },
+  '/sellers': {
+    POST: ['name', 'category', 'imageUrl'],
+  },
+  '/users/:id': {
+    PUT: ['name', 'email', 'password'],
+    PATCH: ['role'],
+  },
+  '/users': {
+    POST: ['name', 'email', 'password'],
+  },
+};
 
-  if ('category' in body && category.length < 6) {
-    throw new Error('Invalid category');
+function validationMiddleware(req, _res, next) {
+  // This middleware performs body validations that are not database related
+  const { method } = req;
+  const { category, email, imageUrl, name, password, price, role } = req.body;
+  const { path } = req.route;
+  const fields = validations[path][method];
+
+  const rules = {
+    category: [category?.length >= 6, 'Invalid category'],
+    email: [/\S+@\S+\.\S+/.test(email), 'Invalid email'],
+    imageUrl: [!imageUrl || imageUrl.length >= 20, 'Invalid image URL'],
+    name: [name?.length >= 6, 'Invalid name'],
+    password: [password?.length >= 6, 'Invalid password'],
+    price: [typeof price === 'number', 'Invalid price'],
+    role: [['customer', 'seller', 'admin'].includes(role), 'Invalid role'],
+  };
+
+  let message = '';
+
+  for (const field of fields) {
+    const [condition] = rules[field];
+    if (!condition) {
+      [, message] = rules[field];
+      break;
+    }
   }
 
-  if ('email' in body && !(email && /\S+@\S+\.\S+/.test(email))) {
-    throw new Error('Invalid email');
+  if (!message) {
+    next();
+  } else {
+    next(new Error(message));
   }
-
-  if ('imageUrl' in body && imageUrl.length < 20) {
-    throw new Error('Invalid image URL');
-  }
-
-  if ('name' in body && name.length < 6) {
-    throw new Error('Invalid name');
-  }
-
-  if ('password' in body && password.length < 6) {
-    throw new Error('Invalid password');
-  }
-
-  if ('role' in body && !['customer', 'seller', 'admin'].includes(role)) {
-    throw new Error('Invalid role');
-  }
-
-  next();
 }
 
 module.exports = validationMiddleware;

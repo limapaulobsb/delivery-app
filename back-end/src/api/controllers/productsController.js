@@ -1,10 +1,10 @@
-const service = require('../services/usersService');
+const service = require('../services/productsService');
 
-const changeRole = async (req, res, next) => {
+const changeSeller = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { role } = req.body;
-    await service.changeRole(id, role);
+    const { sellerId } = req.body;
+    await service.changeSeller(id, sellerId);
     return res.status(200).end();
   } catch (error) {
     next(error);
@@ -14,9 +14,10 @@ const changeRole = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const payload = {
-      email: req.body.email,
-      password: req.body.password,
+      sellerId: req.body.sellerId,
       name: req.body.name,
+      price: req.body.price,
+      imageUrl: req.body.imageUrl,
     };
     const { id } = await service.create(payload);
     return res.status(201).json({ id });
@@ -44,20 +45,10 @@ const findAll = async (_req, res, next) => {
   }
 };
 
-const findUser = async (req, res, next) => {
+const findProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await service.findUser(id);
-    return res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const login = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    const result = await service.login(email, password);
+    const result = await service.findProduct(id);
     return res.status(200).json(result);
   } catch (error) {
     next(error);
@@ -68,9 +59,9 @@ const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payload = {
-      email: req.body.email,
-      password: req.body.password,
       name: req.body.name,
+      price: req.body.price,
+      imageUrl: req.body.imageUrl,
     };
     await service.update(id, payload);
     return res.status(200).end();
@@ -80,11 +71,10 @@ const update = async (req, res, next) => {
 };
 
 module.exports = {
-  changeRole,
+  changeSeller,
   create,
   destroy,
   findAll,
-  findUser,
-  login,
+  findProduct,
   update,
 };

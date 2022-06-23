@@ -1,15 +1,7 @@
-const { Op } = require('sequelize');
 const md5 = require('md5');
 
 const { User } = require('../../database/models');
 const { createToken } = require('../utils');
-
-const genericFind = async (options) => {
-  return User.findOne({
-    where: { [Op.or]: options },
-    attributes: { exclude: ['password'] },
-  });
-};
 
 const verify = {
   credentials: async (email, password) => {
@@ -24,23 +16,20 @@ const verify = {
     return user;
   },
 
-  fields: (...fields) => {
-    for (const field of fields) {
-      if (!field) {
-        throw new Error('All fields must be filled');
-      }
-    }
-  },
-
-  userDoesNotExist: async (options) => {
-    const user = await genericFind(options);
+  userDoesNotExist: async (email) => {
+    const user = await User.findOne({
+      where: { email },
+      attributes: { exclude: ['password'] },
+    });
     if (user) {
-      throw new Error('User already exists');
+      throw new Error('E-mail already used');
     }
   },
 
-  userExists: async (options) => {
-    const user = await genericFind(options);
+  userExists: async (id) => {
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
     if (!user) {
       throw new Error('User not found');
     }
@@ -49,42 +38,46 @@ const verify = {
 };
 
 const changeRole = async (id, role) => {
-  verify.fields(role);
-  await verify.userExists([{ id }]);
-  await User.update({ role }, { where: { id } });
-  return true;
+  await verify.userExists(id);
+  return User.update({ role }, { where: { id } });
 };
 
 const create = async (payload) => {
-  const { email, password, name } = payload;
-  verify.fields(email, password, name);
-  await verify.userDoesNotExist([{ name }, { email }]);
+  const { name, email, password } = payload;
+  await verify.userDoesNotExist(email);
   const hash = md5(password);
-  return User.create({ email, password: hash, name });
+  return User.create({ name, email, password: hash });
 };
 
 const destroy = async (id) => {
-  await verify.userExists([{ id }]);
+  await verify.userExists(id);
   return User.destroy({ where: { id } });
 };
 
 const findAll = async () => User.findAll({ attributes: { exclude: ['password'] } });
 
-const findUser = async (options) => verify.userExists(options);
+const findUser = async (id) => verify.userExists(id);
 
 const login = async (email, password) => {
-  const { id, name, role } = await verify.credentials(email, password);
-  const payload = { id, email, name, role };
+  const user = await verify.credentials(email, password);
+  const payload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
   const token = createToken(payload);
   return { ...payload, token };
 };
 
 const update = async (id, payload) => {
-  const { email, password, name } = payload;
-  verify.fields(email, password, name);
-  await verify.userExists([{ id }]);
+  const { name, email, password } = payload;
+  const user = await verify.userExists(id);
+  if (email !== user.email) {
+    await verify.userDoesNotExist(email);
+  }
   const hash = md5(password);
-  return User.update({ email, password: hash, name }, { where: { id } });
+  return User.update({ name, email, password: hash }, { where: { id } });
 };
 
 module.exports = {
