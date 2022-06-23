@@ -1,5 +1,91 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins&display=swap';
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  --red: rgb(150 30 30);
+  --green: rgb(30 150 30);
+  --blue: rgb(30 30 150);
+  --light-red: rgb(255 180 180);
+  --light-green: rgb(180 255 180);
+  --light-blue: rgb(180 180 255);
+  --light-gray: rgb(210 210 210);
+  --dark-purple: rgb(15 30 45);
+  --color-gradient: linear-gradient(to top right, rgb(210 120 0), rgb(210 0 0), rgb(210 0 120));
+  --box-shadow: 0 2px 2px 0 rgba(0 0 0 / 25%);
+}
+
+body {
+  background-color: var(--dark-purple);
+  font-family: Poppins, sans-serif;
+  min-height: 100vh;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button:disabled {
+  cursor: initial;
+  opacity: 0.5;
+}
+
+input[type='password'],
+input[type='text'] {
+  border: 1px solid var(--light-gray);
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(0 0 0 / 15%) inset;
+  font-family: inherit;
+  padding: 0 10px;
+}
+
+.loader {
+  animation: loader 0.8s linear infinite;
+  border: 4px solid;
+  border-color: white transparent;
+  border-radius: 50%;
+  height: 25px;
+  margin: 0 auto;
+  width: 25px;
+}
+
+.custom-message-container {
+  align-items: center;
+  background-color: var(--red);
+  border-top: 4px solid rgba(255 255 255 / 75%);
+  bottom: 40px;
+  color: white;
+  display: flex;
+  font-style: italic;
+  height: 60px;
+  justify-content: center;
+  left: -360px;
+  opacity: 1;
+  position: fixed;
+  transition: all 1s ease;
+  width: 360px;
+}
+
+.custom-message-container.visible {
+  left: 0;
+  opacity: 1;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
