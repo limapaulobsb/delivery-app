@@ -1,0 +1,104 @@
+header {
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: -80px;
+}
+
+.nav-bar {
+  background-color: var(--dark-purple);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255 255 255 / 10%),
+    rgba(255 255 255 / 0%)
+  );
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar > div,
+.aux-bar > div {
+  display: flex;
+}
+
+.nav-bar > nav {
+  margin-right: 180px;
+}
+
+.nav-bar h1 {
+  color: white;
+  font-size: 1.75rem;
+}
+
+.logo-container > img {
+  width: 60px;
+}
+
+.logo-container + div {
+  align-items: center;
+  display: flex;
+  padding-left: 40px;
+}
+
+.logo-container {
+  background-image: var(--color-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 180px;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0 40px;
+  color: white;
+  line-height: 80px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  background-color: var(--dark-blue);
+}
+
+.aux-bar {
+  align-items: center;
+  background-color: var(--lighter-gray);
+  display: flex;
+  height: 60px;
+  justify-content: space-around;
+}
+
+.aux-bar > div {
+  align-items: center;
+  display: flex;
+}
+
+.aux-bar button {
+  background-color: black;
+  background-image: linear-gradient(
+    135deg,
+    rgba(255 255 255 / 25%),
+    rgba(255 255 255 / 0%)
+  );
+  border: 2px solid black;
+  color: white;
+  font-size: 0.9rem;
+  height: 30px;
+  margin-left: 10px;
+  padding: 0 10px;
+}
+
+.aux-bar button.green {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.price-tag {
+  font-size: 1.25rem;
+}
+
+.price-tag > span:first-of-type {
+  font-weight: 700;
+}

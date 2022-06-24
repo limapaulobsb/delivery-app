@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { MainContext } from '../context';
 import { inputValidation } from '../utils';
-
 import { InputGroup } from '../components';
-import logo from '../assets/logo_color.svg';
+import logo from '../assets/logo_color_full.png';
 import '../styles/Login.css';
 
 function Register() {
@@ -20,7 +19,7 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const registerOk = await register(inputs);
-    if (registerOk) navigate('/main');
+    if (registerOk) navigate('/sellers');
   };
 
   return (

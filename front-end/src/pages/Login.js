@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { MainContext } from '../context';
 import { inputValidation } from '../utils';
-
 import { InputGroup } from '../components';
-import logo from '../assets/logo_color.svg';
+import logo from '../assets/logo_color_full.png';
 import '../styles/Login.css';
 
 function Login() {
@@ -20,7 +19,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const loginOk = await login(inputs);
-    if (loginOk) navigate('/main');
+    if (loginOk) navigate('/sellers');
   };
 
   return (
