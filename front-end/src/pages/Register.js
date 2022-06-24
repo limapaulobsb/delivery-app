@@ -8,9 +8,9 @@ import { InputGroup } from '../components';
 import logo from '../assets/logo_color.svg';
 import '../styles/Login.css';
 
-function Login() {
-  const { isLoading, login } = useContext(MainContext);
-  const [inputs, setInputs] = useState({ email: '', password: '' });
+function Register() {
+  const { isLoading, register } = useContext(MainContext);
+  const [inputs, setInputs] = useState({ email: '', password: '', confirmation: '' });
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -19,8 +19,8 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const loginOk = await login(inputs);
-    if (loginOk) navigate('/main');
+    const registerOk = await register(inputs);
+    if (registerOk) navigate('/main');
   };
 
   return (
@@ -28,28 +28,25 @@ function Login() {
       <img src={logo} alt='Logo' />
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>Cadastro</h2>
+        <InputGroup name='name' onChange={handleChange}>
+          Nome completo:
+        </InputGroup>
         <InputGroup name='email' onChange={handleChange}>
           E-mail:
         </InputGroup>
         <InputGroup type='password' name='password' onChange={handleChange}>
           Senha:
         </InputGroup>
-        <span>Esqueceu a senha?</span>
+        <InputGroup type='password' name='confirmation' onChange={handleChange}>
+          Confirme sua senha:
+        </InputGroup>
         <button type='submit' disabled={!inputValidation(inputs)}>
-          {isLoading ? <div className='loader' /> : 'Entrar'}
-        </button>
-        <button
-          type='button'
-          onClick={() => {
-            navigate('/register');
-          }}
-        >
-          Novo cadastro
+          {isLoading ? <div className='loader' /> : 'Cadastrar'}
         </button>
       </form>
     </main>
   );
 }
 
-export default Login;
+export default Register;

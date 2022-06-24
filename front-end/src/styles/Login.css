@@ -48,12 +48,9 @@
   color: white;
   font-size: 1.25rem;
   height: 50px;
+  margin-top: 20px;
 }
 
 .login-page button:active {
   box-shadow: 0 4px 4px rgba(60 0 0 / 50%) inset;
-}
-
-.login-page button:first-of-type {
-  margin: 20px 0;
 }
