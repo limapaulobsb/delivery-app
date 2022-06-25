@@ -4,7 +4,7 @@ const { User } = require('../../database/models');
 const { createToken } = require('../utils');
 
 const verify = {
-  credentials: async (email, password) => {
+  async credentials(email, password) {
     const hash = md5(password);
     const user = await User.findOne({
       where: { email, password: hash },
@@ -16,7 +16,7 @@ const verify = {
     return user;
   },
 
-  userDoesNotExist: async (email) => {
+  async userDoesNotExist(email) {
     const user = await User.findOne({
       where: { email },
       attributes: { exclude: ['password'] },
@@ -26,7 +26,7 @@ const verify = {
     }
   },
 
-  userExists: async (id) => {
+  async userExists(id) {
     const user = await User.findByPk(id, {
       attributes: { exclude: ['password'] },
     });

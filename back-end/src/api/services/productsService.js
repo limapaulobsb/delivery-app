@@ -1,14 +1,14 @@
 const { Product, Seller } = require('../../database/models');
 
 const verify = {
-  productDoesNotExist: async (name) => {
+  async productDoesNotExist(name) {
     const product = await Product.findOne({ where: { name } });
     if (product) {
       throw new Error('Name already used');
     }
   },
 
-  productExists: async (id) => {
+  async productExists(id) {
     const product = await Product.findByPk(id);
     if (!product) {
       throw new Error('Product not found');
@@ -16,11 +16,12 @@ const verify = {
     return product;
   },
 
-  sellerExists: async (sellerId) => {
+  async sellerExists(sellerId) {
     const seller = await Seller.findByPk(sellerId);
     if (!seller) {
       throw new Error('Seller not found');
     }
+    return seller;
   },
 };
 

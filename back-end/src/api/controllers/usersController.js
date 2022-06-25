@@ -14,9 +14,9 @@ const changeRole = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const payload = {
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      name: req.body.name,
     };
     const { id } = await service.create(payload);
     return res.status(201).json({ id });
@@ -68,9 +68,9 @@ const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payload = {
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      name: req.body.name,
     };
     await service.update(id, payload);
     return res.status(200).end();

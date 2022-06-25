@@ -1,4 +1,4 @@
-const validations = {
+const rules = {
   '/products/:id': {
     PUT: ['name', 'price', 'imageUrl'],
   },
@@ -20,14 +20,14 @@ const validations = {
   },
 };
 
+// This middleware performs body validations that are not database related
 function validationMiddleware(req, _res, next) {
-  // This middleware performs body validations that are not database related
   const { method } = req;
   const { category, email, imageUrl, name, password, price, role } = req.body;
   const { path } = req.route;
-  const fields = validations[path][method];
+  const fields = rules[path][method];
 
-  const rules = {
+  const validations = {
     category: [category?.length >= 6, 'Invalid category'],
     email: [/\S+@\S+\.\S+/.test(email), 'Invalid email'],
     imageUrl: [!imageUrl || imageUrl.length >= 20, 'Invalid image URL'],
@@ -40,9 +40,9 @@ function validationMiddleware(req, _res, next) {
   let message = '';
 
   for (const field of fields) {
-    const [condition] = rules[field];
+    const [condition] = validations[field];
     if (!condition) {
-      [, message] = rules[field];
+      [, message] = validations[field];
       break;
     }
   }

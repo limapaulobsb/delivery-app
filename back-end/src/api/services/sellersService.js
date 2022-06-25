@@ -1,14 +1,14 @@
 const { Seller, User } = require('../../database/models');
 
 const verify = {
-  sellerDoesNotExist: async (name) => {
+  async sellerDoesNotExist(name) {
     const seller = await Seller.findOne({ where: { name } });
     if (seller) {
       throw new Error('Name already used');
     }
   },
 
-  sellerExists: async (id) => {
+  async sellerExists(id) {
     const seller = await Seller.findByPk(id);
     if (!seller) {
       throw new Error('Seller not found');
@@ -16,11 +16,12 @@ const verify = {
     return seller;
   },
 
-  userRole: async (userId) => {
+  async userRole(userId) {
     const user = await User.findByPk(userId);
     if (user?.role !== 'seller') {
       throw new Error('Invalid user');
     }
+    return user;
   },
 };
 
@@ -46,6 +47,11 @@ const findAll = async () => Seller.findAll();
 
 const findSeller = async (id) => verify.sellerExists(id);
 
+const findSellerProducts = async (id) => {
+  const seller = await verify.sellerExists(id);
+  return seller.getProducts();
+};
+
 const update = async (id, payload) => {
   const { name, category, imageUrl } = payload;
   const seller = await verify.sellerExists(id);
@@ -61,5 +67,6 @@ module.exports = {
   destroy,
   findAll,
   findSeller,
+  findSellerProducts,
   update,
 };
