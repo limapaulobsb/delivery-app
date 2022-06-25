@@ -35,13 +35,7 @@ function Header() {
             <span>R$</span>
             <span>0,00</span>
           </div>
-          <button
-            type='button'
-            className='green'
-            onClick={() => {
-              navigate('/checkout');
-            }}
-          >
+          <button type='button' className='green' onClick={() => navigate('/checkout')}>
             Ver carrinho
           </button>
         </div>
@@ -50,8 +44,8 @@ function Header() {
           <button
             type='button'
             onClick={() => {
-              navigate('/login');
               setUser({});
+              navigate('/login');
             }}
           >
             Sair

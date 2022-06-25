@@ -1,0 +1,12 @@
+.seller-card {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  margin: 20px;
+  padding: 10px;
+  width: min-content;
+}
+
+.seller-card > img {
+  width: 290px;
+}

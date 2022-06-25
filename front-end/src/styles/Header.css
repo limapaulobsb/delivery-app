@@ -1,5 +1,6 @@
 header {
   box-shadow: var(--box-shadow);
+  margin-bottom: 40px;
   position: sticky;
   top: -80px;
 }
@@ -64,7 +65,7 @@ header {
 
 .aux-bar {
   align-items: center;
-  background-color: var(--lighter-gray);
+  background-color: white;
   display: flex;
   height: 60px;
   justify-content: space-around;
@@ -86,17 +87,13 @@ header {
   color: white;
   font-size: 0.9rem;
   height: 30px;
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 0 10px;
 }
 
 .aux-bar button.green {
   background-color: var(--green);
   border-color: var(--green);
-}
-
-.price-tag {
-  font-size: 1.25rem;
 }
 
 .price-tag > span:first-of-type {

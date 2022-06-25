@@ -9,7 +9,6 @@
   --light-red: rgb(255 180 180);
   --light-green: rgb(180 255 180);
   --light-blue: rgb(180 180 255);
-  --lighter-gray: rgb(240 240 240);
   --light-gray: rgb(180 180 180);
   --color-gradient: linear-gradient(
     to top right,
@@ -28,7 +27,7 @@
 
 body {
   /* background-color:  var(--lighter-gray); */
-  background-image: linear-gradient(to bottom, var(--lighter-gray), var(--light-gray));
+  background-image: linear-gradient(to bottom, white, var(--light-gray));
   font-family: Poppins, sans-serif;
   min-height: 100vh;
 }

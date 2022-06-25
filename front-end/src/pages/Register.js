@@ -19,7 +19,9 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const registerOk = await register(inputs);
-    if (registerOk) navigate('/sellers');
+    if (registerOk) {
+      navigate('/sellers');
+    }
   };
 
   return (

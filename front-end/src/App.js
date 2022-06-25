@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
-import { Login, NotFound, Orders, Register, Sellers } from './pages';
+import { Login, NotFound, Orders, Products, Register, Sellers } from './pages';
 import { CustomMessage } from './components';
 import './styles/App.css';
 
@@ -17,6 +17,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/sellers/:id/products' element={<Products />} />
         <Route path='/sellers' element={<Sellers />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

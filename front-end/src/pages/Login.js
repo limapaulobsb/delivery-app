@@ -19,7 +19,9 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const loginOk = await login(inputs);
-    if (loginOk) navigate('/sellers');
+    if (loginOk) {
+      navigate('/sellers');
+    }
   };
 
   return (
@@ -38,12 +40,7 @@ function Login() {
         <button type='submit' disabled={!inputValidation(inputs)}>
           {isLoading ? <div className='loader' /> : 'Entrar'}
         </button>
-        <button
-          type='button'
-          onClick={() => {
-            navigate('/register');
-          }}
-        >
+        <button type='button' onClick={() => navigate('/register')}>
           Novo cadastro
         </button>
       </form>

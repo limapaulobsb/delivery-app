@@ -1,29 +1,30 @@
 import axios from 'axios';
 
-const createUser = async (name, email, password) => {
+async function createUser({ body }) {
   try {
-    const result = await axios.post('/users', {
-      name,
-      email,
-      password,
-    });
+    const result = await axios.post('/users', body);
     return result;
   } catch (error) {
     return error.response;
   }
-};
+}
 
-const login = async (email, password) => {
+async function findSellers({ token }) {
   try {
-    const result = await axios.post('/users/login', {
-      email,
-      password,
-    });
+    const result = await axios.get('/sellers', { headers: { token } });
     return result;
   } catch (error) {
     return error.response;
   }
-};
+}
 
+async function login({ body }) {
+  try {
+    const result = await axios.post('/users/login', body);
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+}
 
-export { createUser, login };
+export { createUser, findSellers, login };
