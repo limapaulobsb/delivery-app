@@ -1,17 +1,21 @@
 const { Product, Seller } = require('../../database/models');
+const { errorMessages, settings } = require('../utils');
 
+const lang = settings.language;
+
+// Database validations
 const verify = {
   async productDoesNotExist(name) {
     const product = await Product.findOne({ where: { name } });
     if (product) {
-      throw new Error('Name already used');
+      throw new Error(errorMessages.NAME_USED[lang]);
     }
   },
 
   async productExists(id) {
     const product = await Product.findByPk(id);
     if (!product) {
-      throw new Error('Product not found');
+      throw new Error(errorMessages.PRODUCT_NOT_FOUND[lang]);
     }
     return product;
   },
@@ -19,7 +23,7 @@ const verify = {
   async sellerExists(sellerId) {
     const seller = await Seller.findByPk(sellerId);
     if (!seller) {
-      throw new Error('Seller not found');
+      throw new Error(errorMessages.SELLER_NOT_FOUND[lang]);
     }
     return seller;
   },

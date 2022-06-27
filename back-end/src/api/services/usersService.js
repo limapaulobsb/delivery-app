@@ -1,8 +1,11 @@
 const md5 = require('md5');
 
 const { User } = require('../../database/models');
-const { createToken } = require('../utils');
+const { errorMessages, createToken, settings } = require('../utils');
 
+const lang = settings.language;
+
+// Database validations
 const verify = {
   async credentials(email, password) {
     const hash = md5(password);
@@ -11,7 +14,7 @@ const verify = {
       attributes: { exclude: ['password'] },
     });
     if (!user) {
-      throw new Error('Wrong credentials');
+      throw new Error(errorMessages.WRONG_CREDENTIALS[lang]);
     }
     return user;
   },
@@ -22,7 +25,7 @@ const verify = {
       attributes: { exclude: ['password'] },
     });
     if (user) {
-      throw new Error('E-mail already used');
+      throw new Error(errorMessages.EMAIL_USED[lang]);
     }
   },
 
@@ -31,7 +34,7 @@ const verify = {
       attributes: { exclude: ['password'] },
     });
     if (!user) {
-      throw new Error('User not found');
+      throw new Error(errorMessages.USER_NOT_FOUND[lang]);
     }
     return user;
   },

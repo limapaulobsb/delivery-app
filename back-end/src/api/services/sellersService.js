@@ -1,17 +1,21 @@
 const { Seller, User } = require('../../database/models');
+const { errorMessages, settings } = require('../utils');
 
+const lang = settings.language;
+
+// Database validations
 const verify = {
   async sellerDoesNotExist(name) {
     const seller = await Seller.findOne({ where: { name } });
     if (seller) {
-      throw new Error('Name already used');
+      throw new Error(errorMessages.NAME_USED[lang]);
     }
   },
 
   async sellerExists(id) {
     const seller = await Seller.findByPk(id);
     if (!seller) {
-      throw new Error('Seller not found');
+      throw new Error(errorMessages.SELLER_NOT_FOUND[lang]);
     }
     return seller;
   },
@@ -19,7 +23,7 @@ const verify = {
   async userRole(userId) {
     const user = await User.findByPk(userId);
     if (user?.role !== 'seller') {
-      throw new Error('Invalid user');
+      throw new Error(errorMessages.INVALID_USER[lang]);
     }
     return user;
   },

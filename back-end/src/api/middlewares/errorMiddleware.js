@@ -1,29 +1,16 @@
-const statusCodes = {
-  'Invalid category': 400,
-  'Invalid email': 400,
-  'Invalid image URL': 400,
-  'Invalid name': 400,
-  'Invalid password': 400,
-  'Invalid price': 400,
-  'Invalid role': 400,
-  'Invalid user': 400,
-  'Wrong credentials': 400,
-  'Token expired': 401,
-  'Token validation failed': 401,
-  'Forbidden access': 403,
-  'Product not found': 404,
-  'Seller not found': 404,
-  'Token not found': 404,
-  'User not found': 404,
-  'E-mail already used': 409,
-  'Name already used': 409,
-};
+/* eslint-disable no-unused-vars */
+const { errorMessages, settings } = require('../utils');
 
-// eslint-disable-next-line no-unused-vars
+const lang = settings.language;
+
+// This middleware handles errors and sends the appropriate response
 function errorMiddleware(err, _req, res, _next) {
-  const statusCode = statusCodes[err.message];
-  if (statusCode) return res.status(statusCode).json({ message: err.message });
-  console.log(err);
+  // console.log(err);
+  const errorRef = Object.values(errorMessages);
+  const statusCode = errorRef.find((message) => message[lang] === err.message)?.CODE;
+  if (statusCode) {
+    return res.status(statusCode).json({ message: err.message });
+  }
   return res.status(500).json({ message: 'Internal error' });
 }
 
