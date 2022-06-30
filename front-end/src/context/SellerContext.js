@@ -1,9 +1,9 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import MainContext from './MainContext';
 import * as api from '../api';
 import { statusCodes } from '../utils';
-import MainContext from './MainContext';
 
 const SellerContext = createContext();
 

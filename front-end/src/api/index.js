@@ -18,6 +18,15 @@ async function findSellers({ token }) {
   }
 }
 
+async function findSellerProducts({ id, token }) {
+  try {
+    const result = await axios.get(`/sellers/${id}/products`, { headers: { token } });
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 async function login({ body }) {
   try {
     const result = await axios.post('/users/login', body);
@@ -27,4 +36,4 @@ async function login({ body }) {
   }
 }
 
-export { createUser, findSellers, login };
+export { createUser, findSellers, findSellerProducts, login };

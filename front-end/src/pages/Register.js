@@ -42,7 +42,7 @@ function Register() {
         <InputGroup type='password' name='confirmation' onChange={handleChange}>
           Confirme sua senha:
         </InputGroup>
-        <button type='submit' disabled={!inputValidation(inputs)}>
+        <button type='submit' className='gradient' disabled={!inputValidation(inputs)}>
           {isLoading ? <div className='loader' /> : 'Cadastrar'}
         </button>
       </form>

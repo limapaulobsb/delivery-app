@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from 'react';
 
 import { SellerContext } from '../context';
 import { Header, SellerCard } from '../components';
-import '../styles/Sellers.css';
 
 function Sellers() {
   const { sellers, getSellers } = useContext(SellerContext);
 
   useEffect(() => {
-    if (sellers.length === 0) getSellers();
+    if (sellers.length === 0) {
+      getSellers();
+    }
   }, [sellers.length, getSellers]);
 
   const renderCards = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function InputGroup({ children, name, onChange, type = 'text' }) {
+function InputGroup({ type = 'text', name, onChange, children }) {
   return (
     <label htmlFor={`${name}-input`}>
       <span>{children}</span>

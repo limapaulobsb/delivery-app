@@ -5,6 +5,7 @@ import * as api from '../api';
 import { statusCodes } from '../utils';
 
 const MainContext = createContext();
+
 const localUser = JSON.parse(localStorage.getItem('user'));
 
 export function MainProvider({ children }) {
@@ -14,17 +15,17 @@ export function MainProvider({ children }) {
   const [user, setUser] = useState(localUser || {});
 
   const makeRequest = useCallback(
-    async (request, body, successCode, successFn) => {
+    async (request, payload, successCode, successFn) => {
       setIsLoading(true);
-      const { status, data } = await request({ body, token: user.token });
+      const { status, data } = await request({ ...payload, token: user.token });
       setIsLoading(false);
       if (status === successCode) {
-        successFn(data);
-        return 1;
+        await successFn(data);
+        return true;
       }
       setMessage(data.message);
       setShowMessage(true);
-      return 0;
+      return false;
     },
     [user.token]
   );
@@ -32,7 +33,7 @@ export function MainProvider({ children }) {
   const login = useCallback(
     async (body) => {
       const successFn = (data) => setUser(data);
-      return makeRequest(api.login, body, statusCodes.OK, successFn);
+      return makeRequest(api.login, { body }, statusCodes.OK, successFn);
     },
     [makeRequest]
   );
@@ -40,7 +41,7 @@ export function MainProvider({ children }) {
   const register = useCallback(
     async (body) => {
       const successFn = async () => login(body);
-      return makeRequest(api.createUser, body, statusCodes.CREATED, successFn);
+      return makeRequest(api.createUser, { body }, statusCodes.CREATED, successFn);
     },
     [login, makeRequest]
   );

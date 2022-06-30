@@ -2,8 +2,8 @@
   background-color: white;
   box-shadow: var(--box-shadow);
   cursor: pointer;
-  margin: 20px;
-  padding: 10px;
+  margin: 40px 20px;
+  padding: 20px;
   width: min-content;
 }
 

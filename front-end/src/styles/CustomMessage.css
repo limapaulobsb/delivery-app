@@ -1,0 +1,21 @@
+.custom-message {
+  align-items: center;
+  background-color: var(--yellow);
+  border-top: 4px solid var(--light-yellow);
+  bottom: 40px;
+  color: white;
+  display: flex;
+  font-size: 1.25rem;
+  font-style: italic;
+  height: 60px;
+  justify-content: center;
+  left: -400px;
+  position: fixed;
+  transition: left 1s ease;
+  width: 400px;
+  z-index: 100;
+}
+
+.custom-message.visible {
+  left: 0;
+}

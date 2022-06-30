@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 
 import { MainContext } from '../context';
+import '../styles/CustomMessage.css';
 
 function CustomMessage() {
   const { message, showMessage, setShowMessage } = useContext(MainContext);
@@ -11,13 +12,13 @@ function CustomMessage() {
     if (showMessage) {
       timeoutRef.current = setTimeout(() => {
         setShowMessage(false);
-      }, 4000);
+      }, 5000);
     }
     return () => clearTimeout(timeoutRef.current);
-  }, [showMessage, setShowMessage]);
+  }, [message, showMessage, setShowMessage]);
 
   return (
-    <div className={cx('custom-message-container', { visible: showMessage })}>
+    <div className={cx('custom-message', { visible: showMessage })}>
       <span>{message}</span>
     </div>
   );
