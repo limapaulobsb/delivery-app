@@ -1,23 +1,13 @@
 @import 'https://fonts.googleapis.com/css2?family=Poppins&display=swap';
 
 :root {
-  /* --red: rgb(120 90 90); */
-  /* --green: rgb(90 120 90); */
-  /* --blue: rgb(90 90 120); */
-  --yellow: rgb(180, 180, 0);
+  --yellow: rgb(165 165 0);
   --gray: rgb(180 180 180);
-  /* --dark-red: rgb(90 45 45); */
-  /* --dark-green: rgb(45 90 45); */
   --dark-blue: rgb(45 45 90);
   --dark-purple: rgb(15 30 45);
-  --dark-yellow: rgb(120, 120, 0);
-  /* --light-red: rgb(255 180 180); */
   --lighter-red: rgb(255 210 210);
   --lightest-red: rgb(255 240 240);
-  /* --light-green: rgb(180 255 180); */
-  /* --light-blue: rgb(180 180 255); */
-  /* --light-gray: rgb(210 210 210); */
-  --light-yellow: rgb(255, 255, 180);
+  --light-yellow: rgb(255 255 80);
   --color-gradient: linear-gradient(
     to top right,
     rgb(210 120 0),
@@ -47,7 +37,7 @@ main > ul {
   flex-wrap: wrap;
   justify-content: space-evenly;
   list-style: none;
-  margin: 40px 200px 100px;
+  margin: 40px 320px 100px;
 }
 
 button {
@@ -61,7 +51,14 @@ button {
 
 button:disabled {
   cursor: initial;
-  opacity: 0.5;
+  opacity: 0.4;
+}
+
+button.absolute {
+  font-size: 2.25rem;
+  left: 20px;
+  position: absolute;
+  top: 20px;
 }
 
 button.classic {
@@ -83,13 +80,13 @@ button.classic.black {
 }
 
 button.classic.yellow {
-  background-color: var(--dark-yellow);
+  background-color: var(--yellow);
   background-image: linear-gradient(
     135deg,
     rgba(255 255 255 / 50%),
     rgba(255 255 255 / 0%)
   );
-  border: 2px solid var(--dark-yellow);
+  border: 2px solid var(--yellow);
   color: white;
 }
 
@@ -131,6 +128,7 @@ input[type='text'] {
 }
 
 input[type='number'] {
+  -moz-appearance: textfield;
   border: none;
   font-size: 1.1rem;
   text-align: center;
@@ -142,18 +140,13 @@ input[type='text'] {
   padding: 0 10px;
 }
 
-/* Remove input Arrows/Spinners */
-/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0;
 }
 
-/* Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
+.icon {
+  color: var(--dark-blue);
 }
 
 .loader {
@@ -164,10 +157,6 @@ input[type='number'] {
   height: 25px;
   margin: 0 auto;
   width: 25px;
-}
-
-.svg {
-  width: 24px;
 }
 
 @keyframes loader {

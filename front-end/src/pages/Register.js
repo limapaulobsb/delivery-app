@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { MainContext } from '../context';
 import { inputValidation } from '../utils';
@@ -29,6 +31,9 @@ function Register() {
       <img src={logo} alt='Logo' />
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
+        <button type='button' className='absolute' onClick={() => navigate('/login')}>
+          <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon' />
+        </button>
         <h2>Cadastro</h2>
         <InputGroup name='name' onChange={handleChange}>
           Nome completo:

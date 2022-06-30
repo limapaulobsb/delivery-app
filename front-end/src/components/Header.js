@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { MainContext, ProductContext } from '../context';
 import PriceTag from './PriceTag';
@@ -8,7 +10,7 @@ import '../styles/Header.css';
 
 function Header() {
   const { user, setUser } = useContext(MainContext);
-  const { setCart } = useContext(ProductContext);
+  const { setCart, cartTotal } = useContext(ProductContext);
   const navigate = useNavigate();
 
   return (
@@ -33,7 +35,8 @@ function Header() {
       </div>
       <div className='aux-bar'>
         <div>
-          <PriceTag />
+          <FontAwesomeIcon icon={faCartShopping} className='icon' />
+          <PriceTag price={cartTotal()} />
           <button
             type='button'
             className='classic yellow'
@@ -43,6 +46,7 @@ function Header() {
           </button>
         </div>
         <div>
+          <FontAwesomeIcon icon={faUserAlt} className='icon' />
           <span>{user.email}</span>
           <button
             type='button'

@@ -29,6 +29,10 @@ export function ProductProvider({ children }) {
     [makeRequest]
   );
 
+  const cartTotal = () => {
+    return cart.reduce((acc, { quantity, product }) => acc + quantity * product.price, 0);
+  };
+
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -39,6 +43,7 @@ export function ProductProvider({ children }) {
     products,
     setProducts,
     getProducts,
+    cartTotal,
   };
 
   return (

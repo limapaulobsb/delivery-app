@@ -7,6 +7,11 @@ module.exports = {
         name: 'Distribuidora de bebidas',
         category: 'Bebidas',
       },
+      {
+        user_id: 4,
+        name: 'Hamburgueria Tomate da Selva',
+        category: 'Lanches',
+      },
     ]);
   },
 

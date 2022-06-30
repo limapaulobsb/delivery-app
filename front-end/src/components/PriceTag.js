@@ -4,11 +4,11 @@ import cx from 'classnames';
 
 import '../styles/PriceTag.css';
 
-function PriceTag({ className, price = 0 }) {
+function PriceTag({ className, price }) {
   return (
     <div className={cx('price-tag', className)}>
       <span>R$</span>
-      <span>{price.toLocaleString().replace('.', ',')}</span>
+      <span>{Number(price).toFixed(2).replace('.', ',')}</span>
     </div>
   );
 }

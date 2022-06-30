@@ -28,7 +28,7 @@ function CartControl({ product }) {
     const updatedCart = [...cart];
     if (existsInCart && quantity > 0) {
       updatedCart[index].quantity = quantity;
-      setMessage('Quantidade de itens alterado');
+      setMessage('Quantidade de itens alterada');
     } else if (existsInCart) {
       updatedCart.splice(index, 1);
       setMessage('Item(ns) removido(s) do carrinho');

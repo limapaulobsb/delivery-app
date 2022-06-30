@@ -1,3 +1,8 @@
+.price-tag {
+  color: var(--dark-blue);
+  font-size: 1.1rem;
+}
+
 .price-tag.absolute {
   background-color: var(--dark-blue);
   border-radius: 4px;

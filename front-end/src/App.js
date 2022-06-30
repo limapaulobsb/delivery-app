@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
-import { Login, NotFound, Orders, Products, Register, Sellers } from './pages';
+import { Checkout, Login, NotFound, Orders, Products, Register, Sellers } from './pages';
 import { CustomMessage } from './components';
 import './styles/App.css';
 
@@ -14,6 +14,7 @@ function App() {
       <CustomMessage />
       <Routes>
         <Route exact path='/' element={<Navigate to='/login' />} />
+        <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/register' element={<Register />} />
