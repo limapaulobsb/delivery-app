@@ -1,25 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { SellerContext } from '../context';
 import { Header, SellerCard } from '../components';
 
 function Sellers() {
-  const { sellers, getSellers } = useContext(SellerContext);
-
-  useEffect(() => {
-    if (sellers.length === 0) {
-      getSellers();
-    }
-  }, [sellers.length, getSellers]);
+  const { sellers } = useContext(SellerContext);
 
   const renderCards = () => {
-    return sellers.map(({ id, name, category, imageUrl }) => (
-      <SellerCard key={id} id={id} name={name} category={category} imageUrl={imageUrl} />
-    ));
+    return sellers.map((seller) => <SellerCard key={seller.id} seller={seller} />);
   };
 
   return (
-    <main className='sellers-page'>
+    <main>
       <Header />
       <ul>{renderCards()}</ul>
     </main>

@@ -10,7 +10,7 @@ import '../styles/Header.css';
 
 function Header() {
   const { user, setUser } = useContext(MainContext);
-  const { setCart, cartTotal } = useContext(ProductContext);
+  const { cartTotal, setCart } = useContext(ProductContext);
   const navigate = useNavigate();
 
   return (
@@ -35,22 +35,11 @@ function Header() {
       </div>
       <div className='aux-bar'>
         <div>
-          <FontAwesomeIcon icon={faCartShopping} className='icon' />
-          <PriceTag price={cartTotal()} />
-          <button
-            type='button'
-            className='classic yellow'
-            onClick={() => navigate('/checkout')}
-          >
-            Ver carrinho
-          </button>
-        </div>
-        <div>
           <FontAwesomeIcon icon={faUserAlt} className='icon' />
           <span>{user.email}</span>
           <button
             type='button'
-            className='classic black'
+            className='classic dark'
             onClick={() => {
               setUser({});
               setCart([]);
@@ -58,6 +47,18 @@ function Header() {
             }}
           >
             Sair
+          </button>
+        </div>
+        <div>
+          <FontAwesomeIcon icon={faCartShopping} className='icon' />
+          <PriceTag price={cartTotal} />
+          <button
+            type='button'
+            className='classic yellow'
+            onClick={() => navigate('/checkout')}
+            disabled={cartTotal === 0}
+          >
+            Ver carrinho
           </button>
         </div>
       </div>

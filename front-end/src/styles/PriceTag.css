@@ -1,8 +1,3 @@
-.price-tag {
-  color: var(--dark-blue);
-  font-size: 1.1rem;
-}
-
 .price-tag.absolute {
   background-color: var(--dark-blue);
   border-radius: 4px;
@@ -14,6 +9,6 @@
   top: 20px;
 }
 
-.price-tag > span:first-of-type {
+.price-tag.absolute > span:first-of-type {
   font-weight: 700;
 }

@@ -2,6 +2,7 @@ header {
   box-shadow: var(--box-shadow);
   position: sticky;
   top: -80px;
+  width: 100%;
   z-index: 100;
 }
 
@@ -61,7 +62,7 @@ header div {
 
 .aux-bar {
   align-items: center;
-  background-color: var(--lightest-red);
+  background-color: white;
   height: 60px;
   justify-content: space-around;
 }

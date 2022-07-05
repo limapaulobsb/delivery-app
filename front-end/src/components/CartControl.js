@@ -10,12 +10,10 @@ function CartControl({ product }) {
   const { setMessage, setShowMessage } = useContext(MainContext);
   const { cart, setCart } = useContext(ProductContext);
   const inputRef = useRef();
-
   const index = cart.findIndex(({ product: { id } }) => id === product.id);
   const existsInCart = index !== -1;
-  const quantityInCart = cart[index]?.quantity;
-
-  const [quantity, setQuantity] = useState(quantityInCart || 0);
+  const quantityInCart = existsInCart ? cart[index].quantity : 0;
+  const [quantity, setQuantity] = useState(quantityInCart);
 
   const handleChange = ({ target: { value } }) => {
     if (value) {
@@ -45,6 +43,7 @@ function CartControl({ product }) {
       (!existsInCart && quantity === 0) || (existsInCart && quantity === quantityInCart);
 
     let label = 'Adicionar';
+    
     if (existsInCart && quantity > 0) {
       label = 'Alterar';
     } else if (existsInCart) {
@@ -64,7 +63,7 @@ function CartControl({ product }) {
   };
 
   return (
-    <div className='quantity-control'>
+    <div className='cart-control'>
       <div>
         <button
           type='button'

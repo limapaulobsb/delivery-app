@@ -6,12 +6,11 @@ import { statusCodes } from '../utils';
 
 const MainContext = createContext();
 
-const localUser = JSON.parse(localStorage.getItem('user'));
-
 export function MainProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
+  const localUser = JSON.parse(localStorage.getItem('user'));
   const [user, setUser] = useState(localUser || {});
 
   const makeRequest = useCallback(
@@ -52,16 +51,16 @@ export function MainProvider({ children }) {
 
   const shared = {
     isLoading,
-    setIsLoading,
-    message,
-    setMessage,
-    showMessage,
-    setShowMessage,
-    user,
-    setUser,
-    makeRequest,
     login,
+    makeRequest,
+    message,
     register,
+    setIsLoading,
+    setMessage,
+    setShowMessage,
+    setUser,
+    showMessage,
+    user,
   };
 
   return <MainContext.Provider value={{ ...shared }}>{children}</MainContext.Provider>;

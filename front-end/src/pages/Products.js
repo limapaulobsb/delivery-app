@@ -5,7 +5,7 @@ import { ProductContext } from '../context';
 import { Header, ProductCard } from '../components';
 
 function Products() {
-  const { products, getProducts } = useContext(ProductContext);
+  const { getProducts, products } = useContext(ProductContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function Products() {
   };
 
   return (
-    <main className='products-page'>
+    <main>
       <Header />
       <ul>{renderCards()}</ul>
     </main>

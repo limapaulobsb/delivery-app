@@ -1,15 +1,14 @@
-.quantity-control {
+.cart-control {
   text-align: center;
 }
 
-.quantity-control > div {
+.cart-control > div {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
-.quantity-control input[type=number] {
+.cart-control input {
   margin: 0 20px;
-  width: 40px;
 }

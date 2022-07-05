@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 
@@ -14,12 +15,16 @@ import { statusCodes } from '../utils';
 
 const ProductContext = createContext();
 
-const localCart = JSON.parse(localStorage.getItem('cart'));
-
 export function ProductProvider({ children }) {
   const { makeRequest } = useContext(MainContext);
+  const localCart = JSON.parse(localStorage.getItem('cart'));
   const [cart, setCart] = useState(localCart || []);
   const [products, setProducts] = useState([]);
+
+  const cartTotal = useMemo(
+    () => cart.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0),
+    [cart]
+  );
 
   const getProducts = useCallback(
     async (id) => {
@@ -29,21 +34,17 @@ export function ProductProvider({ children }) {
     [makeRequest]
   );
 
-  const cartTotal = () => {
-    return cart.reduce((acc, { quantity, product }) => acc + quantity * product.price, 0);
-  };
-
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const shared = {
     cart,
-    setCart,
-    products,
-    setProducts,
-    getProducts,
     cartTotal,
+    getProducts,
+    products,
+    setCart,
+    setProducts,
   };
 
   return (

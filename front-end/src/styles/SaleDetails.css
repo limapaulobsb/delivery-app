@@ -1,0 +1,38 @@
+.sale-details {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  counter-reset: item;
+  margin-bottom: 40px;
+  padding: 40px 80px;
+  width: 600px;
+}
+
+.sale-details > h3 {
+  border-bottom: 2px solid var(--lightest-red);
+  font-size: 1.25rem;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+
+.sale-details li {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.sale-details li::before {
+  content: counter(item) '.';
+  counter-increment: item;
+}
+
+.sale-details li > div:first-child {
+  flex-grow: 10;
+  margin: 0 20px 0 10px;
+}
+
+.sale-details > div:last-child {
+  border-top: 2px solid var(--lightest-red);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 20px;
+  padding-top: 10px;
+}

@@ -1,4 +1,11 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
 import PropTypes from 'prop-types';
 
 import MainContext from './MainContext';
@@ -16,10 +23,14 @@ export function SellerProvider({ children }) {
     return makeRequest(api.findSellers, {}, statusCodes.OK, successFn);
   }, [makeRequest]);
 
+  useEffect(() => {
+    getSellers();
+  }, [getSellers]);
+
   const shared = {
+    getSellers,
     sellers,
     setSellers,
-    getSellers,
   };
 
   return (

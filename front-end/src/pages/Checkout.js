@@ -1,17 +1,48 @@
 import React, { useContext } from 'react';
 
-import { ProductContext } from '../context';
-import { Header } from '../components';
+import { MainContext, ProductContext } from '../context';
+import { Header, InputGroup, SaleDetails } from '../components';
 
-function Products() {
+function Checkout() {
+  const { isLoading } = useContext(MainContext);
   const { cart } = useContext(ProductContext);
-  console.log(cart);
+
+  const sales = cart.reduce((acc, curr) => {
+    if (!acc[curr.product.sellerId]) {
+      acc[curr.product.sellerId] = { products: [], totalPrice: 0 };
+    }
+    acc[curr.product.sellerId].products.push(curr);
+    acc[curr.product.sellerId].totalPrice += curr.product.price * curr.quantity;
+    return acc;
+  }, {});
+
+  const sellerIds = Object.keys(sales);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const renderSales = () => {
+    return sellerIds.map((sellerId) => (
+      <SaleDetails key={sellerId} sellerId={Number(sellerId)} sale={sales[sellerId]} />
+    ));
+  };
 
   return (
-    <main className='checkout-page'>
+    <main>
       <Header />
+      <section>
+        <h1>Checkout</h1>
+        {renderSales()}
+      </section>
+      <form onSubmit={handleSubmit}>
+        <InputGroup>Endereço de entrega:</InputGroup>
+        <button type='submit' className='gradient' disabled>
+          {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
+        </button>
+      </form>
     </main>
   );
 }
 
-export default Products;
+export default Checkout;

@@ -9,18 +9,18 @@ async function createUser({ body }) {
   }
 }
 
-async function findSellers({ token }) {
+async function findSellers() {
   try {
-    const result = await axios.get('/sellers', { headers: { token } });
+    const result = await axios.get('/sellers');
     return result;
   } catch (error) {
     return error.response;
   }
 }
 
-async function findSellerProducts({ id, token }) {
+async function findSellerProducts({ id }) {
   try {
-    const result = await axios.get(`/sellers/${id}/products`, { headers: { token } });
+    const result = await axios.get(`/sellers/${id}/products`);
     return result;
   } catch (error) {
     return error.response;

@@ -3,6 +3,7 @@
 :root {
   --yellow: rgb(165 165 0);
   --gray: rgb(180 180 180);
+  --dark-red: rgb(90 45 45);
   --dark-blue: rgb(45 45 90);
   --dark-purple: rgb(15 30 45);
   --lighter-red: rgb(255 210 210);
@@ -14,7 +15,12 @@
     rgb(210 0 0),
     rgb(210 0 120)
   );
-  --box-shadow: 0 2px 2px 0 rgba(0 0 0 / 25%);
+  --white-gradient: linear-gradient(
+    135deg,
+    rgba(255 255 255 / 40%),
+    rgba(255 255 255 / 0%)
+  );
+  --box-shadow: 0 1px 2px 0 rgba(0 0 0 / 25%);
 }
 
 * {
@@ -25,19 +31,8 @@
 
 body {
   background-image: linear-gradient(to bottom, white, var(--lighter-red));
+  color: var(--dark-red);
   font-family: Poppins, sans-serif;
-}
-
-main {
-  min-height: 100vh;
-}
-
-main > ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  list-style: none;
-  margin: 40px 320px 100px;
 }
 
 button {
@@ -51,41 +46,35 @@ button {
 
 button:disabled {
   cursor: initial;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 button.absolute {
-  font-size: 2.25rem;
+  font-size: 2rem;
   left: 20px;
   position: absolute;
   top: 20px;
 }
 
 button.classic {
-  border: 1px solid black;
+  border: 1px solid var(--dark-red);
   font-size: 0.9rem;
+  font-weight: 700;
   height: 30px;
+  letter-spacing: 0.05rem;
   padding: 0 10px;
 }
 
-button.classic.black {
-  background-color: black;
-  background-image: linear-gradient(
-    135deg,
-    rgba(255 255 255 / 50%),
-    rgba(255 255 255 / 0%)
-  );
+button.classic.dark {
+  background-color: var(--dark-red);
+  background-image: var(--white-gradient);
   border-width: 2px;
   color: white;
 }
 
 button.classic.yellow {
   background-color: var(--yellow);
-  background-image: linear-gradient(
-    135deg,
-    rgba(255 255 255 / 50%),
-    rgba(255 255 255 / 0%)
-  );
+  background-image: var(--white-gradient);
   border: 2px solid var(--yellow);
   color: white;
 }
@@ -112,17 +101,30 @@ button.gradient {
   color: white;
   font-size: 1.25rem;
   height: 50px;
+  margin-top: 20px;
+  width: 300px;
 }
 
 button.gradient:active {
   box-shadow: 0 4px 4px rgba(60 0 0 / 50%) inset;
 }
 
-input[type='number'],
-input[type='password'],
-input[type='text'] {
+form {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+form > h2 {
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+}
+
+input {
   border-radius: 4px;
   box-shadow: 0 0 4px 0 rgba(0 0 0 / 25%) inset;
+  color: inherit;
   font-family: inherit;
   height: 40px;
 }
@@ -130,14 +132,18 @@ input[type='text'] {
 input[type='number'] {
   -moz-appearance: textfield;
   border: none;
-  font-size: 1.1rem;
+  font-size: inherit;
   text-align: center;
+  width: 40px;
 }
 
 input[type='password'],
 input[type='text'] {
   border: 1px solid var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
   padding: 0 10px;
+  width: 300px;
 }
 
 input::-webkit-inner-spin-button,
@@ -145,8 +151,34 @@ input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-.icon {
-  color: var(--dark-blue);
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+main > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 40px 320px 100px;
+  width: 100%;
+}
+
+section > h1 {
+  border-bottom: 2px solid var(--lightest-red);
+  font-size: 1.75rem;
+  margin: 40px 0;
+  padding-bottom: 5px;
+}
+
+section + form {
+  align-items: center;
+  padding: 40px;
+  width: 600px;
 }
 
 .loader {

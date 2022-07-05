@@ -1,6 +1,6 @@
 import MainContext, { MainProvider } from './MainContext';
-import SellerContext, { SellerProvider } from './SellerContext';
 import ProductContext, { ProductProvider } from './ProductContext';
+import SellerContext, { SellerProvider } from './SellerContext';
 
 export {
   MainContext,

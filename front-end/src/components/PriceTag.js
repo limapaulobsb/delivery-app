@@ -6,10 +6,10 @@ import '../styles/PriceTag.css';
 
 function PriceTag({ className, price }) {
   return (
-    <div className={cx('price-tag', className)}>
+    <span className={cx('price-tag', className)}>
       <span>R$</span>
       <span>{Number(price).toFixed(2).replace('.', ',')}</span>
-    </div>
+    </span>
   );
 }
 
