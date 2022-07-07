@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ProductContext } from '../context';
+import { MainContext, ProductContext } from '../context';
 import { Header, ProductCard } from '../components';
 
 function Products() {
+  const { isLoading } = useContext(MainContext);
   const { getProducts, products } = useContext(ProductContext);
   const { id } = useParams();
 
@@ -19,7 +20,7 @@ function Products() {
   return (
     <main>
       <Header />
-      <ul>{renderCards()}</ul>
+      {isLoading || <ul>{renderCards()}</ul>}
     </main>
   );
 }

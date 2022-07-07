@@ -28,7 +28,7 @@ function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
   };
 
   return (
-    <div className='sale-details'>
+    <section className='sale-details'>
       <h3>{name}</h3>
       <ol>{renderProducts()}</ol>
       <div>
@@ -43,7 +43,7 @@ function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
         <span>Total: </span>
         <PriceTag price={totalPrice + DELIVERY_FEE + SERVICE_FEE} />
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -17,16 +17,12 @@ header div {
     rgba(255 255 255 / 10%),
     rgba(255 255 255 / 0%)
   );
+  color: white;
   justify-content: space-between;
 }
 
 .nav-bar > nav {
   margin-right: 180px;
-}
-
-.nav-bar h1 {
-  color: white;
-  font-size: 1.75rem;
 }
 
 .logo-container {
@@ -47,7 +43,6 @@ header div {
 }
 
 .nav-link {
-  color: white;
   display: inline-block;
   font-size: 1.25rem;
   font-weight: 700;

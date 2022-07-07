@@ -31,16 +31,16 @@ function Checkout() {
   return (
     <main>
       <Header />
+      <h2>Checkout</h2>
+      {renderSales()}
       <section>
-        <h1>Checkout</h1>
-        {renderSales()}
+        <form onSubmit={handleSubmit}>
+          <InputGroup>Endereço de entrega:</InputGroup>
+          <button type='submit' className='gradient' disabled>
+            {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
+          </button>
+        </form>
       </section>
-      <form onSubmit={handleSubmit}>
-        <InputGroup>Endereço de entrega:</InputGroup>
-        <button type='submit' className='gradient' disabled>
-          {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
-        </button>
-      </form>
     </main>
   );
 }
