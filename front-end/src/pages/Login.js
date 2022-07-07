@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { MainContext } from '../context';
-import { inputValidation } from '../utils';
+import { useValidation } from '../hooks';
 import { InputGroup } from '../components';
 import logo from '../assets/logo_color_full.png';
 import '../styles/Login.css';
@@ -11,6 +11,7 @@ function Login() {
   const { isLoading, login } = useContext(MainContext);
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const [validation] = useValidation([inputs]);
 
   const handleChange = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
@@ -37,7 +38,7 @@ function Login() {
           Senha:
         </InputGroup>
         <span>Esqueceu a senha?</span>
-        <button type='submit' className='gradient' disabled={!inputValidation(inputs)}>
+        <button type='submit' className='gradient' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Entrar'}
         </button>
         <button type='button' className='gradient' onClick={() => navigate('/register')}>

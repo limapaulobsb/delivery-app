@@ -11,16 +11,16 @@
   --light-yellow: rgb(255 255 80);
   --color-gradient: linear-gradient(
     to top right,
-    rgb(210 120 0),
+    rgb(210 120 0) 5%,
     rgb(210 0 0),
-    rgb(210 0 120)
+    rgb(210 0 120) 95%
   );
   --white-gradient: linear-gradient(
     135deg,
     rgba(255 255 255 / 40%),
     rgba(255 255 255 / 0%)
   );
-  --box-shadow: 0 1px 2px 0 rgba(0 0 0 / 25%);
+  --box-shadow: 0 2px 2px 0 rgba(0 0 0 / 25%);
 }
 
 * {
@@ -188,10 +188,6 @@ main > h2 {
   width: 640px;
 }
 
-main > h4 {
-  margin-bottom: 40px;
-}
-
 main > ul {
   display: flex;
   flex-wrap: wrap;
@@ -201,13 +197,9 @@ main > ul {
   width: 100%;
 }
 
-p {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 section {
   background-color: white;
+  border-radius: 4px;
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
@@ -216,22 +208,16 @@ section {
   width: 640px;
 }
 
-section > h3 {
-  margin-bottom: 40px;
+section > button {
+  align-self: center;
 }
 
 section > form {
   align-self: center;
 }
 
-.gravatar-img {
-  border: 8px solid white;
-  border-radius: 50%;
-  box-shadow: var(--box-shadow);
-  box-sizing: content-box;
-  height: 240px;
-  margin: 40px 0 20px;
-  width: 240px;
+section > h3 {
+  margin-bottom: 40px;
 }
 
 .loader {

@@ -1,0 +1,18 @@
+.profile-page > img {
+  border: 8px solid white;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  box-sizing: content-box;
+  height: 180px;
+  margin: 40px 0 20px;
+  width: 180px;
+}
+
+.profile-page > span {
+  margin-bottom: 40px;
+}
+
+.profile-page p {
+  margin-bottom: 20px;
+  text-align: center;
+}

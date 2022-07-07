@@ -4,15 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { MainContext } from '../context';
-import { inputValidation } from '../utils';
+import { useValidation } from '../hooks';
 import { InputGroup } from '../components';
 import logo from '../assets/logo_color_full.png';
 import '../styles/Login.css';
 
 function Register() {
   const { isLoading, register } = useContext(MainContext);
-  const [inputs, setInputs] = useState({ email: '', password: '', confirmation: '' });
+
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmation: '',
+  });
+
   const navigate = useNavigate();
+  const [validation] = useValidation([inputs]);
 
   const handleChange = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
@@ -47,7 +55,7 @@ function Register() {
         <InputGroup type='password' name='confirmation' onChange={handleChange}>
           Confirme sua senha:
         </InputGroup>
-        <button type='submit' className='gradient' disabled={!inputValidation(inputs)}>
+        <button type='submit' className='gradient' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Cadastrar'}
         </button>
       </form>
