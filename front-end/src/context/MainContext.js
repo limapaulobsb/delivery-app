@@ -10,6 +10,7 @@ export function MainProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const localUser = JSON.parse(localStorage.getItem('user'));
   const [user, setUser] = useState(localUser || {});
 
@@ -58,8 +59,10 @@ export function MainProvider({ children }) {
     setIsLoading,
     setMessage,
     setShowMessage,
+    setShowModal,
     setUser,
     showMessage,
+    showModal,
     user,
   };
 

@@ -3,7 +3,7 @@ header {
   position: sticky;
   top: -80px;
   width: 100%;
-  z-index: 100;
+  z-index: 10;
 }
 
 header div {
@@ -37,9 +37,9 @@ header div {
   width: 60px;
 }
 
-.logo-container + div {
-  align-items: center;
-  padding-left: 40px;
+.logo-container + h2 {
+  line-height: 80px;
+  margin-left: 40px;
 }
 
 .nav-link {
@@ -48,7 +48,6 @@ header div {
   font-weight: 700;
   line-height: 80px;
   padding: 0 40px;
-  text-decoration: none;
 }
 
 .nav-link.active {

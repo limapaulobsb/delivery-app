@@ -10,11 +10,11 @@
   width: 300px;
 }
 
-.product-card > h5 {
-  margin-bottom: 20px;
-}
-
 .product-card > img {
   height: 120px;
   margin: 40px 0;
+}
+
+.product-card > h5 {
+  margin-bottom: 20px;
 }

@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 import '../styles/SellerCard.css';
 
-function SellerCard({ seller }) {
+function SellerCard({ seller: { id, name, category, imageUrl } }) {
   const navigate = useNavigate();
-  const { id, name, category, imageUrl } = seller;
 
   return (
     <li
@@ -24,7 +23,7 @@ function SellerCard({ seller }) {
 }
 
 SellerCard.propTypes = {
-  product: PropTypes.object,
-}.isRequired;
+  seller: PropTypes.object.isRequired,
+};
 
 export default SellerCard;

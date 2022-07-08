@@ -19,7 +19,7 @@ function ProductCard({ product }) {
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.object,
-}.isRequired;
+  product: PropTypes.object.isRequired,
+};
 
 export default ProductCard;

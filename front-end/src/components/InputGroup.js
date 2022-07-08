@@ -12,10 +12,10 @@ function InputGroup({ type = 'text', name, onChange, children }) {
 }
 
 InputGroup.propTypes = {
-  children: PropTypes.node,
-  name: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   type: PropTypes.string,
-}.isRequired;
+};
 
 export default InputGroup;

@@ -11,9 +11,10 @@
   justify-content: center;
   left: -400px;
   position: fixed;
-  transition: left 1s ease;
+  transition: all 1s ease;
+  visibility: hidden;
   width: 400px;
-  z-index: 100;
+  z-index: 10;
 }
 
 .custom-message.visible {

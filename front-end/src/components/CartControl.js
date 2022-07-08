@@ -43,7 +43,7 @@ function CartControl({ product }) {
       (!existsInCart && quantity === 0) || (existsInCart && quantity === quantityInCart);
 
     let label = 'Adicionar';
-    
+
     if (existsInCart && quantity > 0) {
       label = 'Alterar';
     } else if (existsInCart) {
@@ -94,7 +94,7 @@ function CartControl({ product }) {
 }
 
 CartControl.propTypes = {
-  product: PropTypes.object,
-}.isRequired;
+  product: PropTypes.object.isRequired,
+};
 
 export default CartControl;

@@ -35,7 +35,7 @@ function Checkout() {
       {renderSales()}
       <section>
         <form onSubmit={handleSubmit}>
-          <InputGroup>Endereço de entrega:</InputGroup>
+          <InputGroup name='address'>Endereço de entrega:</InputGroup>
           <button type='submit' className='gradient' disabled>
             {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
           </button>

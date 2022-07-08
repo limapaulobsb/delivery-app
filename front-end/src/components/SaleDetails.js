@@ -8,7 +8,6 @@ import CartControl from './CartControl';
 
 function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
   const { sellers } = useContext(SellerContext);
-
   const name = sellers.find(({ id }) => id === sellerId)?.name;
   const DELIVERY_FEE = 10;
   const SERVICE_FEE = 2.99;
@@ -48,8 +47,8 @@ function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
 }
 
 SaleDetails.propTypes = {
-  sellerId: PropTypes.number,
-  sale: PropTypes.object,
-}.isRequired;
+  sale: PropTypes.object.isRequired,
+  sellerId: PropTypes.number.isRequired,
+};
 
 export default SaleDetails;

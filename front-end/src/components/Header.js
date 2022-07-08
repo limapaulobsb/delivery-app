@@ -26,9 +26,7 @@ function Header() {
           <div className='logo-container'>
             <img src={logo} alt='Logo' />
           </div>
-          <div>
-            <h2>Delivery App</h2>
-          </div>
+          <h2>Delivery App</h2>
         </div>
         <nav>
           <NavLink to='/sellers' className='nav-link'>

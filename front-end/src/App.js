@@ -21,7 +21,6 @@ axios.defaults.baseURL = 'http://localhost:3001/';
 function App() {
   return (
     <BrowserRouter>
-      <CustomMessage />
       <Routes>
         <Route exact path='/' element={<Navigate to='/login' />} />
         <Route path='/checkout' element={<Checkout />} />
@@ -33,6 +32,7 @@ function App() {
         <Route path='/sellers' element={<Sellers />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <CustomMessage />
     </BrowserRouter>
   );
 }

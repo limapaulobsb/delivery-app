@@ -15,7 +15,7 @@ function PriceTag({ className, price }) {
 
 PriceTag.propTypes = {
   className: PropTypes.string,
-  price: PropTypes.number,
-}.isRequired;
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 export default PriceTag;

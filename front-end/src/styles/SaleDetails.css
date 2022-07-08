@@ -6,6 +6,14 @@
   padding: 0 20px;
 }
 
+.sale-details > div:last-child {
+  border-top: 2px solid var(--lightest-red);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
 .sale-details li {
   display: flex;
   margin-bottom: 40px;
@@ -19,12 +27,4 @@
 .sale-details li > div:first-child {
   flex-grow: 10;
   margin-left: 10px;
-}
-
-.sale-details > div:last-child {
-  border-top: 2px solid var(--lightest-red);
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-top: 20px;
-  padding-top: 10px;
 }
