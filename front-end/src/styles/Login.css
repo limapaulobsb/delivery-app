@@ -4,8 +4,8 @@
 }
 
 .login-page > img {
+  height: 180px;
   margin-bottom: 20px;
-  width: 240px;
 }
 
 .login-page > form {

@@ -9,6 +9,15 @@ async function createUser({ body }) {
   }
 }
 
+async function deleteUser({ id, token }) {
+  try {
+    const result = await axios.delete(`/users/${id}`, { headers: { token } });
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 async function findSellers() {
   try {
     const result = await axios.get('/sellers');
@@ -36,4 +45,4 @@ async function login({ body }) {
   }
 }
 
-export { createUser, findSellers, findSellerProducts, login };
+export { createUser, deleteUser, findSellers, findSellerProducts, login };

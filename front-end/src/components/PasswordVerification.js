@@ -18,9 +18,10 @@ function PasswordVerification({ confirmFn }) {
           <button
             type='button'
             className='classic'
-            onClick={() => {
+            onClick={async () => {
               setShowModal(false);
-              confirmFn(inputRef.current.value);
+              await confirmFn(inputRef.current.value);
+              inputRef.current.value = '';
             }}
           >
             Confirmar
@@ -28,7 +29,10 @@ function PasswordVerification({ confirmFn }) {
           <button
             type='button'
             className='classic dark'
-            onClick={() => setShowModal(false)}
+            onClick={() => {
+              setShowModal(false);
+              inputRef.current.value = '';
+            }}
           >
             Cancelar
           </button>

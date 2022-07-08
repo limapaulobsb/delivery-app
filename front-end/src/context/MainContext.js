@@ -38,6 +38,21 @@ export function MainProvider({ children }) {
     [makeRequest]
   );
 
+  const deleteUser = useCallback(
+    async (verification) => {
+      const loginOk = await login({ email: user.email, password: verification });
+      if (loginOk) {
+        const successFn = () => {
+          setMessage('Conta removida');
+          setShowMessage(true);
+        };
+        return makeRequest(api.deleteUser, { id: user.id }, statusCodes.OK, successFn);
+      }
+      return false;
+    },
+    [login, makeRequest, user.email, user.id]
+  );
+
   const register = useCallback(
     async (body) => {
       const successFn = async () => login(body);
@@ -51,6 +66,7 @@ export function MainProvider({ children }) {
   }, [user]);
 
   const shared = {
+    deleteUser,
     isLoading,
     login,
     makeRequest,
