@@ -3,6 +3,7 @@ import CustomMessage from './CustomMessage';
 import Header from './Header';
 import InputGroup from './InputGroup';
 import Modal from './Modal';
+import PasswordInput from './PasswordInput';
 import PasswordVerification from './PasswordVerification';
 import PriceTag from './PriceTag';
 import ProductCard from './ProductCard';
@@ -15,6 +16,7 @@ export {
   Header,
   InputGroup,
   Modal,
+  PasswordInput,
   PasswordVerification,
   PriceTag,
   ProductCard,

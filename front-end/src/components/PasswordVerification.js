@@ -1,28 +1,34 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { MainContext } from '../context';
 import Modal from './Modal';
+import PasswordInput from './PasswordInput';
 import '../styles/PasswordVerification.css';
 
 function PasswordVerification({ confirmFn }) {
   const { setShowModal } = useContext(MainContext);
-  const inputRef = useRef();
+  const [password, setPassword] = useState('');
 
   return (
     <Modal>
       <div className='password-verification'>
         <p>Para prosseguir, informe sua senha:</p>
-        <input type='password' ref={inputRef} />
+        <PasswordInput
+          name='verification'
+          value={password}
+          onChange={({ target: { value } }) => setPassword(value)}
+        />
         <div>
           <button
             type='button'
             className='classic'
             onClick={async () => {
               setShowModal(false);
-              await confirmFn(inputRef.current.value);
-              inputRef.current.value = '';
+              setPassword('');
+              await confirmFn(password);
             }}
+            disabled={!password}
           >
             Confirmar
           </button>
@@ -31,7 +37,7 @@ function PasswordVerification({ confirmFn }) {
             className='classic dark'
             onClick={() => {
               setShowModal(false);
-              inputRef.current.value = '';
+              setPassword('');
             }}
           >
             Cancelar

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,6 @@ import '../styles/CartControl.css';
 function CartControl({ product }) {
   const { setMessage, setShowMessage } = useContext(MainContext);
   const { cart, setCart } = useContext(ProductContext);
-  const inputRef = useRef();
   const index = cart.findIndex(({ product: { id } }) => id === product.id);
   const existsInCart = index !== -1;
   const quantityInCart = existsInCart ? cart[index].quantity : 0;
@@ -18,7 +17,6 @@ function CartControl({ product }) {
   const handleChange = ({ target: { value } }) => {
     if (value) {
       setQuantity(parseInt(value));
-      inputRef.current.value = parseInt(value);
     }
   };
 
@@ -77,7 +75,6 @@ function CartControl({ product }) {
           type='number'
           value={quantity}
           min={0}
-          ref={inputRef}
           onChange={handleChange}
         />
         <button

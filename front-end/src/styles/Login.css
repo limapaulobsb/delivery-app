@@ -15,11 +15,17 @@
   position: relative;
 }
 
+.login-page > form > .absolute {
+  font-size: 2rem;
+  left: 20px;
+  top: 20px;
+}
+
 .login-page > form > span {
   margin-left: auto;
   text-decoration: line-through;
 }
 
 .login-page h2 {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
 }
