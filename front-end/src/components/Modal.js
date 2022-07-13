@@ -6,7 +6,7 @@ import MainContext from '../context/MainContext';
 import '../styles/Modal.css';
 
 function Modal({ children }) {
-  const { showModal, setShowModal } = useContext(MainContext);
+  const { setShowModal, showModal } = useContext(MainContext);
 
   return (
     <>

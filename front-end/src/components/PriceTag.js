@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import '../styles/PriceTag.css';
-
 function PriceTag({ className, price }) {
   return (
     <span className={cx('price-tag', className)}>

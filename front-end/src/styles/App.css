@@ -19,7 +19,7 @@
   );
   --white-gradient: linear-gradient(
     135deg,
-    rgba(255 255 255 / 40%),
+    rgba(255 255 255 / 25%),
     rgba(255 255 255 / 0%)
   );
   --box-shadow: 0 2px 2px 0 rgba(0 0 0 / 25%);
@@ -158,19 +158,26 @@ button.classic {
   padding: 0 10px;
 }
 
-button.classic.dark {
-  background-color: var(--dark-red);
+button.color {
   background-image: var(--white-gradient);
-  border-width: 2px;
   color: white;
+  height: 30px;
+  padding: 0 10px;
 }
 
-button.classic.yellow {
+button.color.blue {
+  background-color: var(--dark-blue);
+  border: 2px solid var(--dark-blue);
+}
+
+button.color.red {
+  background-color: var(--dark-red);
+  border: 2px solid var(--dark-red);
+}
+
+button.color.yellow {
   background-color: var(--yellow);
-  background-image: var(--white-gradient);
-  border-color: var(--yellow);
-  border-width: 2px;
-  color: white;
+  border: 2px solid var(--yellow);
 }
 
 button.control {

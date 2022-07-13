@@ -8,42 +8,41 @@ import '../styles/PasswordVerification.css';
 
 function PasswordVerification({ confirmFn }) {
   const { setShowModal } = useContext(MainContext);
-  const [password, setPassword] = useState('');
+  const [verification, setVerification] = useState('');
+
+  // Close the modal and execute the passed function
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setShowModal(false);
+    setVerification('');
+    await confirmFn(verification);
+  };
 
   return (
     <Modal>
-      <div className='password-verification'>
+      <form className='password-verification' onSubmit={handleSubmit}>
         <p>Para prosseguir, informe sua senha:</p>
         <PasswordInput
           name='verification'
-          value={password}
-          onChange={({ target: { value } }) => setPassword(value)}
+          value={verification}
+          onChange={({ target: { value } }) => setVerification(value)}
         />
         <div>
-          <button
-            type='button'
-            className='classic'
-            onClick={async () => {
-              setShowModal(false);
-              setPassword('');
-              await confirmFn(password);
-            }}
-            disabled={!password}
-          >
+          <button type='submit' className='color blue' disabled={!verification}>
             Confirmar
           </button>
           <button
             type='button'
-            className='classic dark'
+            className='color red'
             onClick={() => {
               setShowModal(false);
-              setPassword('');
+              setVerification('');
             }}
           >
             Cancelar
           </button>
         </div>
-      </div>
+      </form>
     </Modal>
   );
 }

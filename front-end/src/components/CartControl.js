@@ -7,42 +7,45 @@ import { MainContext, ProductContext } from '../context';
 import '../styles/CartControl.css';
 
 function CartControl({ product }) {
-  const { setMessage, setShowMessage } = useContext(MainContext);
+  const { setAndShow } = useContext(MainContext);
   const { cart, setCart } = useContext(ProductContext);
+
+  // Checks if the product already exists in the cart and its quantity
   const index = cart.findIndex(({ product: { id } }) => id === product.id);
   const existsInCart = index !== -1;
-  const quantityInCart = existsInCart ? cart[index].quantity : 0;
-  const [quantity, setQuantity] = useState(quantityInCart);
+  const qtyInCart = existsInCart ? cart[index].qty : 0;
 
+  const [qty, setQty] = useState(qtyInCart);
+
+  // Input handler
   const handleChange = ({ target: { value } }) => {
     if (value) {
-      setQuantity(parseInt(value));
+      setQty(parseInt(value));
     }
   };
 
-  const handleClick = () => {
+  // Updates cart depending on its state and shows the appropriate message
+  const updateCart = () => {
     const updatedCart = [...cart];
-    if (existsInCart && quantity > 0) {
-      updatedCart[index].quantity = quantity;
-      setMessage('Quantidade de itens alterada');
+    let message = '';
+    if (existsInCart && qty > 0) {
+      updatedCart[index].qty = qty;
+      message = 'Quantidade de itens alterada';
     } else if (existsInCart) {
       updatedCart.splice(index, 1);
-      setMessage('Item(ns) removido(s) do carrinho');
+      message = 'Item(ns) removido(s) do carrinho';
     } else {
-      updatedCart.push({ product, quantity });
-      setMessage('Item(ns) adicionado(s) ao carrinho');
+      updatedCart.push({ product, qty });
+      message = 'Item(ns) adicionado(s) ao carrinho';
     }
     setCart(updatedCart);
-    setShowMessage(true);
+    setAndShow(message);
   };
 
+  // Render functions
   const renderCartButton = () => {
-    const isDisabled =
-      (!existsInCart && quantity === 0) || (existsInCart && quantity === quantityInCart);
-
     let label = 'Adicionar';
-
-    if (existsInCart && quantity > 0) {
+    if (existsInCart && qty > 0) {
       label = 'Alterar';
     } else if (existsInCart) {
       label = 'Remover';
@@ -52,36 +55,28 @@ function CartControl({ product }) {
       <button
         type='button'
         className='classic'
-        onClick={handleClick}
-        disabled={isDisabled}
+        onClick={updateCart}
+        disabled={(!existsInCart && qty === 0) || (existsInCart && qty === qtyInCart)}
       >
         {label}
       </button>
     );
   };
 
+  // Main render
   return (
     <div className='cart-control'>
       <div>
         <button
           type='button'
           className='control'
-          onClick={() => setQuantity(quantity - 1)}
-          disabled={quantity === 0}
+          onClick={() => setQty(qty - 1)}
+          disabled={qty === 0}
         >
           <FontAwesomeIcon icon={faMinus} />
         </button>
-        <input
-          type='number'
-          value={quantity}
-          min={0}
-          onChange={handleChange}
-        />
-        <button
-          type='button'
-          className='control'
-          onClick={() => setQuantity(quantity + 1)}
-        >
+        <input type='number' value={qty} min={0} onChange={handleChange} />
+        <button type='button' className='control' onClick={() => setQty(qty + 1)}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>

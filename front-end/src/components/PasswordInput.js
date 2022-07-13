@@ -5,7 +5,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/PasswordInput.css';
 
-function PasswordInput({ name, value, onChange }) {
+function PasswordInput({ name, onChange, value }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

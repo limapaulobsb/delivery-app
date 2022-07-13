@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+// This custom hook handles most form validations
 function useValidation(inputsArray) {
   const validate = useCallback((inputs) => {
     const MIN_NAME_LENGTH = 6;
@@ -7,6 +8,11 @@ function useValidation(inputsArray) {
     const REGEX = /\S+@\S+\.\S+/;
 
     const { name, email, password, confirmation } = inputs;
+
+    // Conditions for inputs not being valid
+    if (Object.keys(inputs).every((key) => !key)) {
+      return false;
+    }
 
     if (
       ('name' in inputs && name.length < MIN_NAME_LENGTH) ||

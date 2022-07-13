@@ -7,12 +7,13 @@ function Checkout() {
   const { isLoading } = useContext(MainContext);
   const { cart } = useContext(ProductContext);
 
+  // Create a sales object from the cart
   const sales = cart.reduce((acc, curr) => {
     if (!acc[curr.product.sellerId]) {
       acc[curr.product.sellerId] = { products: [], totalPrice: 0 };
     }
     acc[curr.product.sellerId].products.push(curr);
-    acc[curr.product.sellerId].totalPrice += curr.product.price * curr.quantity;
+    acc[curr.product.sellerId].totalPrice += curr.product.price * curr.qty;
     return acc;
   }, {});
 
@@ -22,12 +23,14 @@ function Checkout() {
     event.preventDefault();
   };
 
+  // Render functions
   const renderSales = () => {
     return sellerIds.map((sellerId) => (
       <SaleDetails key={sellerId} sellerId={Number(sellerId)} sale={sales[sellerId]} />
     ));
   };
 
+  // Main render
   return (
     <main>
       <Header />
@@ -35,7 +38,7 @@ function Checkout() {
       {renderSales()}
       <section>
         <form onSubmit={handleSubmit}>
-          <InputGroup name='address'>Endereço de entrega:</InputGroup>
+          <InputGroup label='Endereço de entrega:' name='address' />
           <button type='submit' className='gradient' disabled>
             {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
           </button>

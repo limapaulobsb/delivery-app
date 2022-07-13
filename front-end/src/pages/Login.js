@@ -13,10 +13,12 @@ function Login() {
   const navigate = useNavigate();
   const [validation] = useValidation([inputs]);
 
+  // Input handler
   const handleChange = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  // Execute the login and if successful redirect to the appropriate page
   const handleSubmit = async (event) => {
     event.preventDefault();
     const loginOk = await login(inputs);
@@ -31,12 +33,13 @@ function Login() {
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
         <h2>Login</h2>
-        <InputGroup name='email' onChange={handleChange}>
-          E-mail:
-        </InputGroup>
-        <InputGroup type='password' name='password' onChange={handleChange}>
-          Senha:
-        </InputGroup>
+        <InputGroup label='E-mail:' name='email' onChange={handleChange} />
+        <InputGroup
+          type='password'
+          label='Senha:'
+          name='password'
+          onChange={handleChange}
+        />
         <span>Esqueceu a senha?</span>
         <button type='submit' className='gradient' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Entrar'}

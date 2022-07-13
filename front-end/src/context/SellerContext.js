@@ -12,12 +12,14 @@ import MainContext from './MainContext';
 import api from '../api';
 import { statusCodes } from '../utils';
 
+// Provides seller related data and methods
 const SellerContext = createContext();
 
 export function SellerProvider({ children }) {
   const { makeRequest } = useContext(MainContext);
   const [sellers, setSellers] = useState([]);
 
+  // Request functions
   const getSellers = useCallback(async () => {
     const successFn = (data) => setSellers(data);
     return makeRequest(api.findSellers, {}, statusCodes.OK, successFn);
@@ -28,9 +30,7 @@ export function SellerProvider({ children }) {
   }, [getSellers]);
 
   const shared = {
-    getSellers,
     sellers,
-    setSellers,
   };
 
   return (

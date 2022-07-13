@@ -2,23 +2,25 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { SellerContext } from '../context';
+import CartControl from './CartControl';
 import PriceTag from './PriceTag';
 import '../styles/SaleDetails.css';
-import CartControl from './CartControl';
 
-function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
+function SaleDetails({ sale: { products, totalPrice }, sellerId }) {
   const { sellers } = useContext(SellerContext);
-  const name = sellers.find(({ id }) => id === sellerId)?.name;
+
   const DELIVERY_FEE = 10;
   const SERVICE_FEE = 2.99;
+  const name = sellers.find(({ id }) => id === sellerId)?.name;
 
+  // Render functions
   const renderProducts = () => {
-    return products.map(({ product, quantity }) => {
+    return products.map(({ product, qty }) => {
       return (
         <li key={product.id}>
           <div>
             <div>{product.name}</div>
-            <PriceTag price={product.price * quantity} />
+            <PriceTag price={product.price * qty} />
           </div>
           <CartControl product={product} />
         </li>
@@ -26,6 +28,7 @@ function SaleDetails({ sellerId, sale: { products, totalPrice } }) {
     });
   };
 
+  // Main render
   return (
     <section className='sale-details'>
       <h3>{name}</h3>

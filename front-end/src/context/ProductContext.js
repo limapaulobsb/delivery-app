@@ -13,19 +13,20 @@ import MainContext from './MainContext';
 import api from '../api';
 import { statusCodes } from '../utils';
 
+// Provides product related data and methods
 const ProductContext = createContext();
 
 export function ProductProvider({ children }) {
   const { makeRequest } = useContext(MainContext);
-  const localCart = JSON.parse(localStorage.getItem('cart'));
-  const [cart, setCart] = useState(localCart || []);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) ?? []);
   const [products, setProducts] = useState([]);
 
   const cartTotal = useMemo(
-    () => cart.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0),
+    () => cart.reduce((acc, { product, qty }) => acc + product.price * qty, 0),
     [cart]
   );
 
+  // Request functions
   const getProducts = useCallback(
     async (id) => {
       const successFn = (data) => setProducts(data);
@@ -34,6 +35,7 @@ export function ProductProvider({ children }) {
     [makeRequest]
   );
 
+  // Keeps localStorage up to date with cart data
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -44,7 +46,6 @@ export function ProductProvider({ children }) {
     getProducts,
     products,
     setCart,
-    setProducts,
   };
 
   return (

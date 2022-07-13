@@ -13,10 +13,12 @@ function Products() {
     getProducts(id);
   }, [getProducts, id]);
 
+  // Render functions
   const renderCards = () => {
     return products.map((product) => <ProductCard key={product.id} product={product} />);
   };
 
+  // Main render
   return (
     <main>
       <Header />

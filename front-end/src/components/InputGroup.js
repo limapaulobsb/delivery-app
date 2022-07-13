@@ -3,18 +3,29 @@ import PropTypes from 'prop-types';
 
 import PasswordInput from './PasswordInput';
 
-function InputGroup({ type = 'text', name, onChange, children }) {
+function InputGroup({ defaultValue, label, name, onChange, type = 'text', value }) {
+  // Render functions
   const renderInput = () => {
     if (type === 'password') {
-      return <PasswordInput name={name} onChange={onChange} />;
+      return <PasswordInput name={name} value={value} onChange={onChange} />;
     } else {
-      return <input type={type} id={`${name}-input`} name={name} onChange={onChange} />;
+      return (
+        <input
+          type={type}
+          id={`${name}-input`}
+          name={name}
+          defaultValue={defaultValue}
+          value={value}
+          onChange={onChange}
+        />
+      );
     }
   };
 
+  // Main render
   return (
     <label htmlFor={`${name}-input`}>
-      <span>{children}</span>
+      <span>{label}</span>
       <br />
       {renderInput()}
     </label>
@@ -22,10 +33,12 @@ function InputGroup({ type = 'text', name, onChange, children }) {
 }
 
 InputGroup.propTypes = {
-  children: PropTypes.node.isRequired,
+  defaultValue: PropTypes.string,
+  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   type: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default InputGroup;

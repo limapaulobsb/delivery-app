@@ -9,7 +9,7 @@ import logo from '../assets/logo_white.png';
 import '../styles/Header.css';
 
 function Header() {
-  const { user, setUser } = useContext(MainContext);
+  const { setUser, user } = useContext(MainContext);
   const { cartTotal, setCart } = useContext(ProductContext);
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ function Header() {
             <FontAwesomeIcon icon={faUserAlt} className='icon' />
             <span>{user.email}</span>
           </Link>
-          <button type='button' className='classic dark' onClick={logout}>
+          <button type='button' className='color red' onClick={logout}>
             Sair
           </button>
         </div>
@@ -52,7 +52,7 @@ function Header() {
           <PriceTag price={cartTotal} />
           <button
             type='button'
-            className='classic yellow'
+            className='color yellow'
             onClick={() => navigate('/checkout')}
             disabled={cartTotal === 0}
           >

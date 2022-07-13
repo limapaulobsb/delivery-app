@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PriceTag from './PriceTag';
 import CartControl from './CartControl';
+import PriceTag from './PriceTag';
 import '../styles/ProductCard.css';
 
 function ProductCard({ product }) {
@@ -10,7 +10,7 @@ function ProductCard({ product }) {
 
   return (
     <li className='product-card'>
-      <PriceTag className='absolute' price={price} />
+      <PriceTag price={price} className='absolute' />
       <img src={imageUrl} alt='' />
       <h5>{name}</h5>
       <CartControl product={product} />

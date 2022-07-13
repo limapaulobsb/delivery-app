@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { MainContext } from '../context';
 import { useValidation } from '../hooks';
@@ -22,10 +22,12 @@ function Register() {
   const navigate = useNavigate();
   const [validation] = useValidation([inputs]);
 
+  // Input handler
   const handleChange = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  // Execute the registration and if successful redirect to the appropriate page
   const handleSubmit = async (event) => {
     event.preventDefault();
     const registerOk = await register(inputs);
@@ -40,21 +42,23 @@ function Register() {
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
         <button type='button' className='absolute' onClick={() => navigate('/login')}>
-          <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon' />
+          <FontAwesomeIcon icon={faArrowLeft} className='icon' />
         </button>
         <h2>Cadastro</h2>
-        <InputGroup name='name' onChange={handleChange}>
-          Nome completo:
-        </InputGroup>
-        <InputGroup name='email' onChange={handleChange}>
-          E-mail:
-        </InputGroup>
-        <InputGroup type='password' name='password' onChange={handleChange}>
-          Senha:
-        </InputGroup>
-        <InputGroup type='password' name='confirmation' onChange={handleChange}>
-          Confirme sua senha:
-        </InputGroup>
+        <InputGroup label='Nome completo:' name='name' onChange={handleChange} />
+        <InputGroup label='E-mail:' name='email' onChange={handleChange} />
+        <InputGroup
+          type='password'
+          label='Senha:'
+          name='password'
+          onChange={handleChange}
+        />
+        <InputGroup
+          type='password'
+          label='Confirme sua senha:'
+          name='confirmation'
+          onChange={handleChange}
+        />
         <button type='submit' className='gradient' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Cadastrar'}
         </button>
