@@ -1,48 +1,52 @@
 import axios from 'axios';
 
-async function createUser({ body }) {
+async function genericRequest(axiosFn, ...params) {
   try {
-    const result = await axios.post('/users', body);
+    const result = await axiosFn(...params);
     return result;
   } catch (error) {
     return error.response;
   }
 }
 
-async function deleteUser({ id, token }) {
-  try {
-    const result = await axios.delete(`/users/${id}`, { headers: { token } });
-    return result;
-  } catch (error) {
-    return error.response;
-  }
-}
+const api = {
+  async changePassword({ id, body, token }) {
+    return genericRequest(axios.patch, `/users/${id}/password`, body, {
+      headers: { token },
+    });
+  },
 
-async function findSellers() {
-  try {
-    const result = await axios.get('/sellers');
-    return result;
-  } catch (error) {
-    return error.response;
+  async changeRole({ id, body, token }) {
+    return genericRequest(axios.patch, `/users/${id}/role`, body, {
+      headers: { token },
+    });
+  },
+  
+  async createUser({ body }) {
+    return genericRequest(axios.post, '/users', body);
+  },
+  
+  async deleteUser({ id, token }) {
+    return genericRequest(axios.delete, `/users/${id}`, { headers: { token } });
+  },
+  
+  async findSellers() {
+    return genericRequest(axios.get, '/sellers');
+  },
+  
+  async findSellerProducts({ id }) {
+    return genericRequest(axios.get, `/sellers/${id}/products`);
+  },
+  
+  async login({ body }) {
+    return genericRequest(axios.post, '/users/login', body);
+  },
+  
+  async updateUser({ id, body, token }) {
+    return genericRequest(axios.put, `/users/${id}`, body, {
+      headers: { token },
+    });
   }
-}
+};
 
-async function findSellerProducts({ id }) {
-  try {
-    const result = await axios.get(`/sellers/${id}/products`);
-    return result;
-  } catch (error) {
-    return error.response;
-  }
-}
-
-async function login({ body }) {
-  try {
-    const result = await axios.post('/users/login', body);
-    return result;
-  } catch (error) {
-    return error.response;
-  }
-}
-
-export { createUser, deleteUser, findSellers, findSellerProducts, login };
+export default api;

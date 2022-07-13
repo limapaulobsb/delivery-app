@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import * as api from '../api';
+import api from '../api';
 import { statusCodes } from '../utils';
 
 const MainContext = createContext();
@@ -15,12 +15,12 @@ export function MainProvider({ children }) {
   const [user, setUser] = useState(localUser || {});
 
   const makeRequest = useCallback(
-    async (request, payload, successCode, successFn) => {
+    async (apiRequest, payload, successCode, successFn) => {
       setIsLoading(true);
-      const { status, data } = await request({ ...payload, token: user.token });
+      const { status, data } = await apiRequest({ ...payload, token: user.token });
       setIsLoading(false);
       if (status === successCode) {
-        await successFn(data);
+        successFn(data);
         return true;
       }
       setMessage(data.message);

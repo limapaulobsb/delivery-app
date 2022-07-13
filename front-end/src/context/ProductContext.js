@@ -10,7 +10,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import MainContext from './MainContext';
-import * as api from '../api';
+import api from '../api';
 import { statusCodes } from '../utils';
 
 const ProductContext = createContext();
