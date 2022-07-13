@@ -17,9 +17,14 @@ const rules = {
   '/sellers': {
     POST: ['name', 'category', 'imageUrl?'],
   },
-  '/users/:id': {
-    PUT: ['name', 'email', 'password'],
+  '/users/:id/password': {
+    PATCH: ['password'],
+  },
+  '/users/:id/role': {
     PATCH: ['role'],
+  },
+  '/users/:id': {
+    PUT: ['name', 'email'],
   },
   '/users': {
     POST: ['name', 'email', 'password'],
@@ -49,13 +54,12 @@ function validationMiddleware({ body, method, route }, _res, next) {
     const parsedField = isRequired ? field : field.slice(0, -1);
     const [condition] = validations[parsedField];
 
-    if (isRequired && !body[parsedField]) {
-      console.log(field);
+    if (isRequired && !(parsedField in body)) {
       message = errorMessages.MISSING_FIELD[lang];
       break;
     }
 
-    if (body[parsedField] && !condition) {
+    if (parsedField in body && !condition) {
       [, message] = validations[parsedField];
       break;
     }

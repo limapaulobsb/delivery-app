@@ -40,6 +40,12 @@ const verify = {
   },
 };
 
+const changePassword = async (id, password) => {
+  await verify.userExists(id);
+  const hash = md5(password);
+  return User.update({ password: hash }, { where: { id } });
+};
+
 const changeRole = async (id, role) => {
   await verify.userExists(id);
   return User.update({ role }, { where: { id } });
@@ -74,16 +80,16 @@ const login = async (email, password) => {
 };
 
 const update = async (id, payload) => {
-  const { name, email, password } = payload;
+  const { name, email } = payload;
   const user = await verify.userExists(id);
   if (email !== user.email) {
     await verify.userDoesNotExist(email);
   }
-  const hash = md5(password);
-  return User.update({ name, email, password: hash }, { where: { id } });
+  return User.update({ name, email }, { where: { id } });
 };
 
 module.exports = {
+  changePassword,
   changeRole,
   create,
   destroy,

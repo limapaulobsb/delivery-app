@@ -17,15 +17,21 @@ async function authMiddleware(req, _res, next) {
     let permissions = {};
 
     switch (path) {
+      // Access conditions
+      // Falsy values indicate that only administrators have access
+      // Missing methods will get a truthy condition value,
+      // which means everyone with a valid token will be authorized
+      case '/products/:id/seller': {
+        permissions = {
+          PATCH: false,
+        };
+        break;
+      }
       case '/products/:id': {
         const product = await Product.findByPk(paramsId, { include: Seller });
-        // Access conditions
-        // Falsy values indicate that only administrators have access
-        // Missing methods will get a truthy condition value,
-        // which means everyone with a valid token will be authorized
         permissions = {
           PUT: sessionId === product?.Seller.userId,
-          PATCH: 0,
+          PATCH: false,
           DELETE: sessionId === product?.Seller.userId,
         };
         break;
@@ -37,38 +43,53 @@ async function authMiddleware(req, _res, next) {
         };
         break;
       }
+      case '/sellers/:id/user': {
+        permissions = {
+          PATCH: false,
+        };
+        break;
+      }
       case '/sellers/:id': {
         const seller = await Seller.findByPk(paramsId);
         permissions = {
           PUT: sessionId === seller?.userId,
-          PATCH: 0,
+          PATCH: false,
           DELETE: sessionId === seller?.userId,
         };
         break;
       }
       case '/sellers':
         permissions = {
-          POST: 0,
+          POST: false,
+        };
+        break;
+      case '/users/:id/password':
+        permissions = {
+          PATCH: sessionId === paramsId,
+        };
+        break;
+      case '/users/:id/role':
+        permissions = {
+          PATCH: false,
         };
         break;
       case '/users/:id':
         permissions = {
           GET: sessionId === paramsId,
           PUT: sessionId === paramsId,
-          PATCH: 0,
           DELETE: sessionId === paramsId,
         };
         break;
       case '/users':
         permissions = {
-          GET: 0,
+          GET: false,
         };
         break;
       default:
         break;
     }
 
-    const condition = permissions[method] ?? 1;
+    const condition = permissions[method] ?? true;
 
     // Advances to the appropriate middleware
     if (condition || role === 'admin') {

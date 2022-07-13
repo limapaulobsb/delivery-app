@@ -32,6 +32,12 @@ module.exports = {
         password: '4297f44b13955235245b2497399d7a93',
         role: 'admin',
       },
+      {
+        name: 'Vitória Gonçalves de Souza e Lima',
+        email: 'viit.gsouza@gmail.com',
+        password: '13962f26b05bdcb92c542be519a32320',
+        role: 'customer',
+      },
     ]);
   },
 

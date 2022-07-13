@@ -1,5 +1,16 @@
 const service = require('../services/usersService');
 
+const changePassword = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+    await service.changePassword(id, password);
+    return res.status(200).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 const changeRole = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -70,7 +81,6 @@ const update = async (req, res, next) => {
     const payload = {
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
     };
     await service.update(id, payload);
     return res.status(200).end();
@@ -80,6 +90,7 @@ const update = async (req, res, next) => {
 };
 
 module.exports = {
+  changePassword,
   changeRole,
   create,
   destroy,

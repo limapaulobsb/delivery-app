@@ -1,17 +1,18 @@
 const { Router } = require('express');
 
-const userAuth = require('../middlewares/authMiddleware');
-const bodyValidation = require('../middlewares/validationMiddleware');
+const auth = require('../middlewares/authMiddleware');
+const validation = require('../middlewares/validationMiddleware');
 const controller = require('../controllers/usersController');
 
 const usersRoute = Router();
 
 usersRoute.post('/users/login', controller.login);
-usersRoute.get('/users/:id', userAuth, controller.findUser);
-usersRoute.put('/users/:id', userAuth, bodyValidation, controller.update);
-usersRoute.patch('/users/:id', userAuth, bodyValidation, controller.changeRole);
-usersRoute.delete('/users/:id', userAuth, controller.destroy);
-usersRoute.post('/users', bodyValidation, controller.create);
-usersRoute.get('/users', userAuth, controller.findAll);
+usersRoute.patch('/users/:id/password', auth, validation, controller.changePassword);
+usersRoute.patch('/users/:id/role', auth, validation, controller.changeRole);
+usersRoute.get('/users/:id', auth, controller.findUser);
+usersRoute.put('/users/:id', auth, validation, controller.update);
+usersRoute.delete('/users/:id', auth, controller.destroy);
+usersRoute.post('/users', validation, controller.create);
+usersRoute.get('/users', auth, controller.findAll);
 
 module.exports = usersRoute;
