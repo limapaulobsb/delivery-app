@@ -1,5 +1,5 @@
 const { errorMessages, settings, verifyToken } = require('../utils');
-const { Product, Seller } = require('../../database/models');
+const { Product, Sale, Seller } = require('../../database/models');
 
 const lang = settings.language;
 
@@ -28,11 +28,12 @@ async function authMiddleware(req, _res, next) {
         break;
       }
       case '/products/:id': {
-        const product = await Product.findByPk(paramsId, { include: Seller });
+        const product = await Product.findByPk(paramsId, {
+          include: { model: Seller, as: 'seller' },
+        });
         permissions = {
-          PUT: sessionId === product?.Seller.userId,
-          PATCH: false,
-          DELETE: sessionId === product?.Seller.userId,
+          PUT: sessionId === product?.seller.userId,
+          DELETE: sessionId === product?.seller.userId,
         };
         break;
       }
@@ -43,6 +44,30 @@ async function authMiddleware(req, _res, next) {
         };
         break;
       }
+      case '/sales/:id/status': {
+        const sale = await Sale.findByPk(paramsId, {
+          include: { model: Seller, as: 'seller' },
+        });
+        permissions = {
+          PATCH: sessionId === sale?.seller.userId,
+        };
+        break;
+      }
+      case '/sales/:id': {
+        const sale = await Sale.findByPk(paramsId, {
+          include: { model: Seller, as: 'seller' },
+        });
+        permissions = {
+          GET: sessionId === sale?.seller.userId || sessionId === sale?.userId,
+          DELETE: sessionId === sale?.seller.userId,
+        };
+        break;
+      }
+      case '/sales':
+        permissions = {
+          GET: false,
+        };
+        break;
       case '/sellers/:id/user': {
         permissions = {
           PATCH: false,
@@ -53,7 +78,6 @@ async function authMiddleware(req, _res, next) {
         const seller = await Seller.findByPk(paramsId);
         permissions = {
           PUT: sessionId === seller?.userId,
-          PATCH: false,
           DELETE: sessionId === seller?.userId,
         };
         break;

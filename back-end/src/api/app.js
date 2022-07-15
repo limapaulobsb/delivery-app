@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const { productsRoute, sellersRoute, usersRoute } = require('./routes');
+const { productsRoute, salesRoute, sellersRoute, usersRoute } = require('./routes');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const app = express();
@@ -11,6 +11,7 @@ app.use(express.static('public'));
 app.use(cors());
 
 app.use(productsRoute);
+app.use(salesRoute);
 app.use(sellersRoute);
 app.use(usersRoute);
 

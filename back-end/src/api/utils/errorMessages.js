@@ -1,5 +1,10 @@
 const errorMessages = {
   // Body validation
+  INVALID_ADDRESS: {
+    CODE: 400,
+    EN: 'Invalid field "deliveryAddress"',
+    'PT-BR': 'Campo "deliveryAddress" inválido',
+  },
   INVALID_CATEGORY: {
     CODE: 400,
     EN: 'Invalid field "category"',
@@ -30,10 +35,25 @@ const errorMessages = {
     EN: 'Invalid field "price"',
     'PT-BR': 'Campo "price" inválido',
   },
+  INVALID_PRODUCTS: {
+    CODE: 400,
+    EN: 'Invalid field "products"',
+    'PT-BR': 'Campo "products" inválido',
+  },
   INVALID_ROLE: {
     CODE: 400,
     EN: 'Invalid field "role"',
     'PT-BR': 'Campo "role" inválido',
+  },
+  INVALID_STATUS: {
+    CODE: 400,
+    EN: 'Invalid field "status"',
+    'PT-BR': 'Campo "status" inválido',
+  },
+  INVALID_TOTAL_PRICE: {
+    CODE: 400,
+    EN: 'Invalid field "totalPrice"',
+    'PT-BR': 'Campo "totalPrice" inválido',
   },
   INVALID_USER: {
     CODE: 400,
@@ -77,6 +97,11 @@ const errorMessages = {
     CODE: 404,
     EN: 'Product not found',
     'PT-BR': 'Produto não encontrado',
+  },
+  SALE_NOT_FOUND: {
+    CODE: 404,
+    EN: 'Sale not found',
+    'PT-BR': 'Venda não encontrada',
   },
   SELLER_NOT_FOUND: {
     CODE: 404,
