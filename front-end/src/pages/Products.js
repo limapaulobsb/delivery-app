@@ -22,7 +22,7 @@ function Products() {
   return (
     <main>
       <Header />
-      {isLoading || <ul>{renderCards()}</ul>}
+      {isLoading || <ul className='flex-list'>{renderCards()}</ul>}
     </main>
   );
 }

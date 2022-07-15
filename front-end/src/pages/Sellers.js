@@ -15,7 +15,7 @@ function Sellers() {
   return (
     <main>
       <Header />
-      <ul>{renderCards()}</ul>
+      <ul className='flex-list'>{renderCards()}</ul>
     </main>
   );
 }

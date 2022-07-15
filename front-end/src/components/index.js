@@ -7,6 +7,7 @@ import PasswordInput from './PasswordInput';
 import PasswordVerification from './PasswordVerification';
 import PriceTag from './PriceTag';
 import ProductCard from './ProductCard';
+import SaleCard from './SaleCard';
 import SaleDetails from './SaleDetails';
 import SellerCard from './SellerCard';
 
@@ -20,6 +21,7 @@ export {
   PasswordVerification,
   PriceTag,
   ProductCard,
+  SaleCard,
   SaleDetails,
   SellerCard,
 };

@@ -4,13 +4,14 @@
 
 :root {
   --yellow: rgb(165 165 0);
-  --gray: rgb(180 180 180);
   --dark-red: rgb(90 45 45);
   --dark-blue: rgb(45 45 90);
   --dark-purple: rgb(15 30 45);
-  --lighter-red: rgb(255 210 210);
-  --lightest-red: rgb(255 240 240);
   --light-yellow: rgb(255 255 80);
+  --lighter-red: rgb(255 210 210);
+  --lighter-green: rgb(210 240 210);
+  --lighter-blue: rgb(210 210 240);
+  --lightest-red: rgb(255 240 240);
   --color-gradient: linear-gradient(
     to top right,
     rgb(210 120 0) 5%,
@@ -69,13 +70,8 @@ section > form {
   align-self: center;
 }
 
-main > ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+ul {
   list-style: none;
-  padding: 40px 320px 100px;
-  width: 100%;
 }
 
 /* _\|/_ Primary Elements End _\|/_ */
@@ -165,14 +161,14 @@ button.color {
   padding: 0 10px;
 }
 
-button.color.blue {
-  background-color: var(--dark-blue);
-  border: 2px solid var(--dark-blue);
-}
-
 button.color.red {
   background-color: var(--dark-red);
   border: 2px solid var(--dark-red);
+}
+
+button.color.blue {
+  background-color: var(--dark-blue);
+  border: 2px solid var(--dark-blue);
 }
 
 button.color.yellow {
@@ -249,6 +245,20 @@ input[type='text'] {
 
 .absolute {
   position: absolute;
+}
+
+.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 40px 320px 100px;
+  width: 100%;
+}
+
+.grid-list {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .loader {

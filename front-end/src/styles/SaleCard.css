@@ -1,0 +1,72 @@
+.sale-card {
+  background-color: var(--lightest-red);
+  border: 1px solid var(--lighter-red);
+  border-left-width: 5px;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  text-align: center;
+  transition: all 0.2s ease;
+  top: 0;
+  width: 400px;
+}
+
+.sale-card:hover {
+  box-shadow: 0 4px 4px 0 rgba(0 0 0 / 10%);
+  top: -5px;
+}
+
+.sale-card div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.sale-card > div:first-of-type {
+  background-color: white;
+  width: 100px;
+}
+
+.sale-card > div:last-of-type {
+  flex-grow: 10;
+  padding: 10px;
+}
+
+.sale-status {
+  border-radius: 4px;
+  flex-grow: 10;
+  font-weight: 700;
+  height: 100%;
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+
+.sale-status.green {
+  background-color: var(--lighter-green);
+}
+
+.sale-status.blue {
+  background-color: var(--lighter-blue);
+}
+
+.sale-status.yellow {
+  background-color: var(--light-yellow);
+}
+
+.sale-status + div {
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.sale-date,
+.sale-total {
+  background-color: white;
+  border-radius: 4px;
+  padding: 5px 0;
+  width: 120px;
+}
+
+.sale-date {
+  margin-bottom: 5px;
+}

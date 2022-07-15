@@ -38,6 +38,10 @@ const api = {
     return genericRequest(axios.get, `/sellers/${id}/products`);
   },
 
+  async findUserSales({ id, token }) {
+    return genericRequest(axios.get, `/users/${id}/sales`, { headers: { token } });
+  },
+
   async login({ body }) {
     return genericRequest(axios.post, '/users/login', body);
   },
