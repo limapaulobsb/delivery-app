@@ -9,6 +9,7 @@ const usersRoute = Router();
 usersRoute.post('/users/login', controller.login);
 usersRoute.patch('/users/:id/password', auth, validation, controller.changePassword);
 usersRoute.patch('/users/:id/role', auth, validation, controller.changeRole);
+usersRoute.get('/users/:id/sales', auth, controller.findUserSales);
 usersRoute.get('/users/:id', auth, controller.findUser);
 usersRoute.put('/users/:id', auth, validation, controller.update);
 usersRoute.delete('/users/:id', auth, controller.destroy);

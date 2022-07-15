@@ -7,6 +7,7 @@ const controller = require('../controllers/sellersController');
 const sellersRoute = Router();
 
 sellersRoute.get('/sellers/:id/products', controller.findSellerProducts);
+sellersRoute.get('/sellers/:id/sales', auth, controller.findSellerSales);
 sellersRoute.patch('/sellers/:id/user', auth, controller.changeUser);
 sellersRoute.get('/sellers/:id', auth, controller.findSeller);
 sellersRoute.put('/sellers/:id', auth, validation, controller.update);

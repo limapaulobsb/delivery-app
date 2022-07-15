@@ -65,6 +65,16 @@ const findSellerProducts = async (req, res, next) => {
   }
 };
 
+const findSellerSales = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await service.findSellerSales(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -87,5 +97,6 @@ module.exports = {
   findAll,
   findSeller,
   findSellerProducts,
+  findSellerSales,
   update,
 };

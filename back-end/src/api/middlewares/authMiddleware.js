@@ -68,6 +68,13 @@ async function authMiddleware(req, _res, next) {
           GET: false,
         };
         break;
+      case '/sellers/:id/sales': {
+        const seller = await Seller.findByPk(paramsId);
+        permissions = {
+          GET: sessionId === seller?.userId,
+        };
+        break;
+      }
       case '/sellers/:id/user': {
         permissions = {
           PATCH: false,
@@ -97,6 +104,12 @@ async function authMiddleware(req, _res, next) {
           PATCH: false,
         };
         break;
+      case '/users/:id/sales': {
+        permissions = {
+          GET: sessionId === paramsId,
+        };
+        break;
+      }
       case '/users/:id':
         permissions = {
           GET: sessionId === paramsId,

@@ -5,7 +5,7 @@ module.exports = {
       {
         sale_id: 1,
         product_id: 1,
-        quantity: 24,
+        quantity: 12,
       },
       {
         sale_id: 1,
@@ -39,6 +39,31 @@ module.exports = {
       },
       {
         sale_id: 3,
+        product_id: 10,
+        quantity: 1,
+      },
+      {
+        sale_id: 4,
+        product_id: 1,
+        quantity: 6,
+      },
+      {
+        sale_id: 4,
+        product_id: 2,
+        quantity: 1,
+      },
+      {
+        sale_id: 5,
+        product_id: 6,
+        quantity: 1,
+      },
+      {
+        sale_id: 5,
+        product_id: 8,
+        quantity: 1,
+      },
+      {
+        sale_id: 5,
         product_id: 10,
         quantity: 1,
       },

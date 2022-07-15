@@ -67,6 +67,11 @@ const findAll = async () => User.findAll({ attributes: { exclude: ['password'] }
 
 const findUser = async (id) => verify.userExists(id);
 
+const findUserSales = async (id) => {
+  const user = await verify.userExists(id);
+  return user.getSales({ order: [['date', 'DESC']] });
+};
+
 const login = async (email, password) => {
   const user = await verify.credentials(email, password);
   const payload = {
@@ -95,6 +100,7 @@ module.exports = {
   destroy,
   findAll,
   findUser,
+  findUserSales,
   login,
   update,
 };

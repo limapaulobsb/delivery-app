@@ -56,6 +56,11 @@ const findSellerProducts = async (id) => {
   return seller.getProducts();
 };
 
+const findSellerSales = async (id) => {
+  const seller = await verify.sellerExists(id);
+  return seller.getSales({ order: [['date', 'DESC']] });
+};
+
 const update = async (id, payload) => {
   const { name, category, imageUrl } = payload;
   const seller = await verify.sellerExists(id);
@@ -72,5 +77,6 @@ module.exports = {
   findAll,
   findSeller,
   findSellerProducts,
+  findSellerSales,
   update,
 };

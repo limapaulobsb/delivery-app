@@ -65,6 +65,16 @@ const findUser = async (req, res, next) => {
   }
 };
 
+const findUserSales = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await service.findUserSales(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -96,6 +106,7 @@ module.exports = {
   destroy,
   findAll,
   findUser,
+  findUserSales,
   login,
   update,
 };
