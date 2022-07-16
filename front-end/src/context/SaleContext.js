@@ -10,15 +10,16 @@ const SaleContext = createContext();
 
 export function SaleProvider({ children }) {
   const { makeRequest, user } = useContext(MainContext);
+  const [sale, setSale] = useState({});
   const [sales, setSales] = useState([]);
 
   // Request functions
-  const getSellerSales = useCallback(
-    async (id = user.id) => {
-      const successFn = (data) => setSales(data);
-      return makeRequest(api.findSellerSales, { id }, statusCodes.OK, successFn);
+  const getSale = useCallback(
+    async (id) => {
+      const successFn = (data) => setSale(data);
+      return makeRequest(api.findSale, { id }, statusCodes.OK, successFn);
     },
-    [makeRequest, user.id]
+    [makeRequest]
   );
 
   const getUserSales = useCallback(
@@ -30,8 +31,9 @@ export function SaleProvider({ children }) {
   );
 
   const shared = {
-    getSellerSales,
+    getSale,
     getUserSales,
+    sale,
     sales,
   };
 

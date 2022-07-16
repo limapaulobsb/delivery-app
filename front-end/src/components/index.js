@@ -8,7 +8,7 @@ import PasswordVerification from './PasswordVerification';
 import PriceTag from './PriceTag';
 import ProductCard from './ProductCard';
 import SaleCard from './SaleCard';
-import SaleDetails from './SaleDetails';
+import SaleProductList from './SaleProductList';
 import SellerCard from './SellerCard';
 
 export {
@@ -22,6 +22,6 @@ export {
   PriceTag,
   ProductCard,
   SaleCard,
-  SaleDetails,
+  SaleProductList,
   SellerCard,
 };

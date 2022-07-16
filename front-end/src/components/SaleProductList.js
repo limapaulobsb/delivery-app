@@ -1,28 +1,39 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { SellerContext } from '../context';
 import CartControl from './CartControl';
 import PriceTag from './PriceTag';
-import '../styles/SaleDetails.css';
+import '../styles/SaleProductList.css';
 
-function SaleDetails({ sale: { products, totalPrice }, sellerId }) {
+function SaleProductList({ products }) {
   const { sellers } = useContext(SellerContext);
+  const { pathname } = useLocation();
 
   const DELIVERY_FEE = 10;
   const SERVICE_FEE = 2.99;
-  const name = sellers.find(({ id }) => id === sellerId)?.name;
+  const name = sellers.find(({ id }) => id === products[0].product.sellerId)?.name;
+
+  const total = products.reduce(
+    (acc, { product, quantity }) => acc + product.price * quantity,
+    0
+  );
 
   // Render functions
   const renderProducts = () => {
-    return products.map(({ product, qty }) => {
+    return products.map(({ product, quantity }) => {
       return (
         <li key={product.id}>
           <div>
             <div>{product.name}</div>
-            <PriceTag price={product.price * qty} />
+            <PriceTag price={product.price * quantity} />
           </div>
-          <CartControl product={product} />
+          {pathname === '/checkout' ? (
+            <CartControl product={product} />
+          ) : (
+            <div>{`Qde: ${quantity}`}</div>
+          )}
         </li>
       );
     });
@@ -30,7 +41,7 @@ function SaleDetails({ sale: { products, totalPrice }, sellerId }) {
 
   // Main render
   return (
-    <section className='sale-details'>
+    <section className='sale-product-list'>
       <h3>{name}</h3>
       <ol>{renderProducts()}</ol>
       <div>
@@ -43,15 +54,14 @@ function SaleDetails({ sale: { products, totalPrice }, sellerId }) {
       </div>
       <div>
         <span>Total: </span>
-        <PriceTag price={totalPrice + DELIVERY_FEE + SERVICE_FEE} />
+        <PriceTag price={total + DELIVERY_FEE + SERVICE_FEE} />
       </div>
     </section>
   );
 }
 
-SaleDetails.propTypes = {
-  sale: PropTypes.object.isRequired,
-  sellerId: PropTypes.number.isRequired,
+SaleProductList.propTypes = {
+  products: PropTypes.array.isRequired,
 };
 
-export default SaleDetails;
+export default SaleProductList;

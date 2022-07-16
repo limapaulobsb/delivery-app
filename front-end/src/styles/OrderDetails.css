@@ -1,0 +1,25 @@
+.order-details-page > h2 {
+  position: relative;
+}
+
+.order-details-page .absolute {
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+  top: 0;
+}
+
+.order-details-page .absolute.green {
+  background-color: var(--lighter-green);
+}
+
+.order-details-page .absolute.blue {
+  background-color: var(--lighter-blue);
+}
+
+.order-details-page .absolute.yellow {
+  background-color: var(--light-yellow);
+}

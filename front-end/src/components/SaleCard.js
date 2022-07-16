@@ -22,7 +22,7 @@ function SaleCard({ sale: { id, totalPrice, date, status } }) {
       tabIndex='0'
       className='sale-card'
       aria-label={`Pedido ${id}`}
-      onClick={() => navigate(`/sales/${id}`)}
+      onClick={() => navigate(`/orders/${id}`)}
     >
       <div>{id.toString().padStart(4, '0')}</div>
       <div>

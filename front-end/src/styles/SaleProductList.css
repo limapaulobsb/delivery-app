@@ -1,12 +1,12 @@
-.sale-details {
+.sale-product-list {
   counter-reset: item;
 }
 
-.sale-details > ol {
+.sale-product-list > ol {
   padding: 0 20px;
 }
 
-.sale-details > div:last-child {
+.sale-product-list > div:last-child {
   border-top: 2px solid var(--lightest-red);
   font-size: 1.1rem;
   font-weight: 700;
@@ -14,17 +14,17 @@
   padding-top: 10px;
 }
 
-.sale-details li {
+.sale-product-list li {
   display: flex;
   margin-bottom: 40px;
 }
 
-.sale-details li::before {
+.sale-product-list li::before {
   content: counter(item) '.';
   counter-increment: item;
 }
 
-.sale-details li > div:first-child {
+.sale-product-list li > div:first-child {
   flex-grow: 10;
   margin-left: 10px;
 }

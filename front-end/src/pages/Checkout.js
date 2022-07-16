@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { MainContext, ProductContext } from '../context';
-import { Header, InputGroup, SaleDetails } from '../components';
+import { Header, InputGroup, SaleProductList } from '../components';
 
 function Checkout() {
   const { isLoading } = useContext(MainContext);
@@ -10,10 +10,9 @@ function Checkout() {
   // Create a sales object from the cart
   const sales = cart.reduce((acc, curr) => {
     if (!acc[curr.product.sellerId]) {
-      acc[curr.product.sellerId] = { products: [], totalPrice: 0 };
+      acc[curr.product.sellerId] = [];
     }
-    acc[curr.product.sellerId].products.push(curr);
-    acc[curr.product.sellerId].totalPrice += curr.product.price * curr.qty;
+    acc[curr.product.sellerId].push(curr);
     return acc;
   }, {});
 
@@ -26,7 +25,7 @@ function Checkout() {
   // Render functions
   const renderSales = () => {
     return sellerIds.map((sellerId) => (
-      <SaleDetails key={sellerId} sellerId={Number(sellerId)} sale={sales[sellerId]} />
+      <SaleProductList key={sellerId} products={sales[sellerId]} />
     ));
   };
 

@@ -22,7 +22,7 @@ export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   const cartTotal = useMemo(
-    () => cart.reduce((acc, { product, qty }) => acc + product.price * qty, 0),
+    () => cart.reduce((acc, { product, quantity }) => acc + product.price * quantity, 0),
     [cart]
   );
 
