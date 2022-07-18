@@ -69,7 +69,12 @@ const findUser = async (id) => verify.userExists(id);
 
 const findUserSales = async (id) => {
   const user = await verify.userExists(id);
-  return user.getSales({ order: [['date', 'DESC']] });
+  return user.getSales({
+    order: [
+      ['date', 'DESC'],
+      ['id', 'DESC'],
+    ],
+  });
 };
 
 const login = async (email, password) => {

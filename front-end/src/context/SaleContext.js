@@ -13,7 +13,26 @@ export function SaleProvider({ children }) {
   const [sale, setSale] = useState({});
   const [sales, setSales] = useState([]);
 
+  const DELIVERY_FEE = 10;
+  const SERVICE_FEE = 2.99;
+
+  const saleTotal = useCallback((products) => {
+    const total = products.reduce(
+      (acc, { product, quantity }) => acc + product.price * quantity,
+      0
+    );
+    return total + DELIVERY_FEE + SERVICE_FEE;
+  }, []);
+
   // Request functions
+  const createSale = useCallback(
+    async (body) => {
+      const successFn = () => {};
+      return makeRequest(api.createSale, { body }, statusCodes.CREATED, successFn);
+    },
+    [makeRequest]
+  );
+
   const getSale = useCallback(
     async (id) => {
       const successFn = (data) => setSale(data);
@@ -31,9 +50,13 @@ export function SaleProvider({ children }) {
   );
 
   const shared = {
+    DELIVERY_FEE,
+    SERVICE_FEE,
+    createSale,
     getSale,
     getUserSales,
     sale,
+    saleTotal,
     sales,
   };
 

@@ -25,6 +25,10 @@ const api = {
     });
   },
 
+  async createSale({ body, token }) {
+    return genericRequest(axios.post, '/sales', body, { headers: { token } });
+  },
+
   async createUser({ body }) {
     return genericRequest(axios.post, '/users', body);
   },

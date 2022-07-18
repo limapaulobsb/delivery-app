@@ -3,14 +3,14 @@
 /* Custom Properties */
 
 :root {
-  --yellow: rgb(165 165 0);
+  --yellow: rgb(150 150 0);
   --dark-red: rgb(90 45 45);
   --dark-blue: rgb(45 45 90);
   --dark-purple: rgb(15 30 45);
-  --light-yellow: rgb(255 255 80);
   --lighter-red: rgb(255 210 210);
   --lighter-green: rgb(210 240 210);
   --lighter-blue: rgb(210 210 240);
+  --lighter-yellow: rgb(240 240 150);
   --lightest-red: rgb(255 240 240);
   --color-gradient: linear-gradient(
     to top right,
@@ -37,7 +37,7 @@
 /* _\|/_ Primary Elements Start _\|/_ */
 
 body {
-  background-image: linear-gradient(to bottom, white, var(--lighter-red));
+  background-image: linear-gradient(to bottom, var(--lightest-red), var(--lighter-red));
   color: var(--dark-red);
   font-family: Poppins, sans-serif;
 }

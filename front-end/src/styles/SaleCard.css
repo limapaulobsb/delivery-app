@@ -36,6 +36,7 @@
 .sale-status {
   border-radius: 4px;
   flex-grow: 10;
+  font-size: 0.9rem;
   font-weight: 700;
   height: 100%;
   padding: 0 10px;
@@ -51,7 +52,7 @@
 }
 
 .sale-status.yellow {
-  background-color: var(--light-yellow);
+  background-color: var(--lighter-yellow);
 }
 
 .sale-status + div {

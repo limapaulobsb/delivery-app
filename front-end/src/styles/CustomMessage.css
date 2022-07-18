@@ -1,7 +1,7 @@
 .custom-message {
   align-items: center;
   background-color: var(--yellow);
-  border-top: 4px solid var(--light-yellow);
+  border-top: 4px solid var(--lighter-yellow);
   bottom: 40px;
   color: white;
   display: flex;

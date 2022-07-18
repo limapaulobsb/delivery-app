@@ -2,23 +2,17 @@ import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { SellerContext } from '../context';
+import { SaleContext, SellerContext } from '../context';
 import CartControl from './CartControl';
 import PriceTag from './PriceTag';
 import '../styles/SaleProductList.css';
 
 function SaleProductList({ products }) {
+  const { DELIVERY_FEE, SERVICE_FEE, saleTotal } = useContext(SaleContext);
   const { sellers } = useContext(SellerContext);
   const { pathname } = useLocation();
 
-  const DELIVERY_FEE = 10;
-  const SERVICE_FEE = 2.99;
   const name = sellers.find(({ id }) => id === products[0]?.product.sellerId)?.name;
-
-  const total = products.reduce(
-    (acc, { product, quantity }) => acc + product.price * quantity,
-    0
-  );
 
   // Render functions
   const renderProducts = () => {
@@ -54,7 +48,7 @@ function SaleProductList({ products }) {
       </div>
       <div>
         <span>Total: </span>
-        <PriceTag price={total + DELIVERY_FEE + SERVICE_FEE} />
+        <PriceTag price={saleTotal(products)} />
       </div>
     </section>
   );
