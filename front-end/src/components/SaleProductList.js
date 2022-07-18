@@ -13,7 +13,7 @@ function SaleProductList({ products }) {
 
   const DELIVERY_FEE = 10;
   const SERVICE_FEE = 2.99;
-  const name = sellers.find(({ id }) => id === products[0].product.sellerId)?.name;
+  const name = sellers.find(({ id }) => id === products[0]?.product.sellerId)?.name;
 
   const total = products.reduce(
     (acc, { product, quantity }) => acc + product.price * quantity,

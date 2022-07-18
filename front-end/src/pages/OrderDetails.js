@@ -31,12 +31,14 @@ function OrderDetails() {
         <span>{`Pedido #${sale.id?.toString().padStart(4, '0')}`}</span>
         <div className={`absolute ${bgColor}`}>{sale.status}</div>
       </h2>
-      <section>
-        <span>{`Data: ${new Date(sale.date).toLocaleDateString('pt-BR')}`}</span>
-        <br />
-        <span>{`Endereço de entrega: ${sale.deliveryAddress}`}</span>
-      </section>
       <SaleProductList products={sale.products ?? []} />
+      <section>
+        <span>Data:</span>
+        <span>{new Date(sale.date).toLocaleString('pt-BR')}</span>
+        <br />
+        <span>Endereço de entrega:</span>
+        <span>{sale.deliveryAddress}</span>
+      </section>
     </main>
   );
 }
