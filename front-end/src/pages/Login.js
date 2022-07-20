@@ -28,7 +28,7 @@ function Login() {
   };
 
   return (
-    <main className='login-page'>
+    <main className='login'>
       <img src={logo} alt='Logo' />
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
@@ -40,11 +40,11 @@ function Login() {
           name='password'
           onChange={handleChange}
         />
-        <span>Esqueceu a senha?</span>
-        <button type='submit' className='gradient' disabled={!validation}>
+        <span className='login__text'>Esqueceu a senha?</span>
+        <button type='submit' className='gradient-button' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Entrar'}
         </button>
-        <button type='button' className='gradient' onClick={() => navigate('/register')}>
+        <button type='button' className='gradient-button' onClick={() => navigate('/register')}>
           Novo cadastro
         </button>
       </form>

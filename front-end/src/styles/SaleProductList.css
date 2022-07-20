@@ -1,12 +1,8 @@
-.sale-product-list {
+.list-container {
   counter-reset: item;
 }
 
-.sale-product-list > ol {
-  padding: 0 20px;
-}
-
-.sale-product-list > div:last-child {
+.list-container > div:last-child {
   border-top: 2px solid var(--lightest-red);
   font-size: 1.1rem;
   font-weight: 700;
@@ -14,17 +10,21 @@
   padding-top: 10px;
 }
 
-.sale-product-list li {
+.sale-product-list {
+  padding: 0 20px;
+}
+
+.sale-product-list__item {
   display: flex;
   margin-bottom: 40px;
 }
 
-.sale-product-list li::before {
+.sale-product-list__item::before {
   content: counter(item) '.';
   counter-increment: item;
 }
 
-.sale-product-list li > div:first-child {
+.sale-product-list__item > div:first-child {
   flex-grow: 10;
   margin-left: 10px;
 }

@@ -18,7 +18,7 @@ function SaleProductList({ products }) {
   const renderProducts = () => {
     return products.map(({ product, quantity }) => {
       return (
-        <li key={product.id}>
+        <li key={product.id} className='sale-product-list__item'>
           <div>
             <div>{product.name}</div>
             <PriceTag price={product.price * quantity} />
@@ -35,9 +35,9 @@ function SaleProductList({ products }) {
 
   // Main render
   return (
-    <section className='sale-product-list'>
+    <section className='list-container'>
       <h3>{name}</h3>
-      <ol>{renderProducts()}</ol>
+      <ol className='sale-product-list'>{renderProducts()}</ol>
       <div>
         <span>Taxa de entrega: </span>
         <PriceTag price={DELIVERY_FEE} />

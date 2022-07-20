@@ -10,8 +10,10 @@ function Products() {
   const { id } = useParams();
 
   useEffect(() => {
-    getProducts(id);
-  }, [getProducts, id]);
+    if (Number(id) !== products[0].sellerId) {
+      getProducts(id);
+    }
+  }, [getProducts, id, products]);
 
   // Render functions
   const renderCards = () => {

@@ -9,27 +9,26 @@ function OrderDetails() {
   const { getSale, sale } = useContext(SaleContext);
   const { id } = useParams();
 
-  let bgColor = 'blue';
+  let bgColor = 'bg-blue';
 
   if (sale.status === 'Pendente') {
-    bgColor = 'yellow';
+    bgColor = 'bg-yellow';
   } else if (sale.status === 'Entregue') {
-    bgColor = 'green';
+    bgColor = 'bg-green';
   }
 
   useEffect(() => {
-    // !
     if (Number(id) !== sale.id) {
       getSale(id);
     }
   }, [getSale, id, sale.id]);
 
   return (
-    <main className='order-details-page'>
+    <main className='order-details'>
       <Header />
       <h2>
         <span>{`Pedido #${sale.id?.toString().padStart(4, '0')}`}</span>
-        <div className={`absolute ${bgColor}`}>{sale.status}</div>
+        <div className={`order-details__status ${bgColor}`}>{sale.status}</div>
       </h2>
       <SaleProductList products={sale.products ?? []} />
       <section>

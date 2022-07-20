@@ -11,11 +11,11 @@ function PasswordVerification({ confirmFn }) {
   const [verification, setVerification] = useState('');
 
   // Close the modal and execute the passed function
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setShowModal(false);
     setVerification('');
-    await confirmFn(verification);
+    confirmFn(verification);
   };
 
   return (
@@ -28,12 +28,12 @@ function PasswordVerification({ confirmFn }) {
           onChange={({ target: { value } }) => setVerification(value)}
         />
         <div>
-          <button type='submit' className='color blue' disabled={!verification}>
+          <button type='submit' className='color-button--blue' disabled={!verification}>
             Confirmar
           </button>
           <button
             type='button'
-            className='color red'
+            className='color-button--red'
             onClick={() => {
               setShowModal(false);
               setVerification('');

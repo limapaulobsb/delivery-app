@@ -6,7 +6,6 @@
   cursor: pointer;
   display: flex;
   position: relative;
-  text-align: center;
   transition: all 0.2s ease;
   top: 0;
   width: 400px;
@@ -33,7 +32,7 @@
   padding: 10px;
 }
 
-.sale-status {
+.sale-card__status {
   border-radius: 4px;
   flex-grow: 10;
   font-size: 0.9rem;
@@ -43,31 +42,19 @@
   text-transform: uppercase;
 }
 
-.sale-status.green {
-  background-color: var(--lighter-green);
-}
-
-.sale-status.blue {
-  background-color: var(--lighter-blue);
-}
-
-.sale-status.yellow {
-  background-color: var(--lighter-yellow);
-}
-
-.sale-status + div {
+.sale-card__status + div {
   flex-direction: column;
   margin-left: 5px;
 }
 
-.sale-date,
-.sale-total {
+.sale-card__date,
+.sale-card__total {
   background-color: white;
   border-radius: 4px;
-  padding: 5px 0;
+  height: 40px;
   width: 120px;
 }
 
-.sale-date {
+.sale-card__date {
   margin-bottom: 5px;
 }

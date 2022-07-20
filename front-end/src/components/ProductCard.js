@@ -10,7 +10,7 @@ function ProductCard({ product }) {
 
   return (
     <li className='product-card'>
-      <PriceTag price={price} className='absolute' />
+      <PriceTag price={price} className='product-card__price' />
       <img src={imageUrl} alt='' />
       <h5>{name}</h5>
       <CartControl product={product} />

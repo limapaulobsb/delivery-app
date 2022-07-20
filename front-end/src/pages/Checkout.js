@@ -71,7 +71,7 @@ function Checkout() {
             name='address'
             onChange={handleChange}
           />
-          <button type='submit' className='gradient' disabled={!validation}>
+          <button type='submit' className='gradient-button' disabled={!validation}>
             {isLoading ? <div className='loader' /> : 'Finalizar pedido'}
           </button>
         </form>

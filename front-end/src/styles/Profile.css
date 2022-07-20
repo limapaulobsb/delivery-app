@@ -1,18 +1,13 @@
-.profile-page > img {
+.profile > img {
   border: 8px solid white;
   border-radius: 50%;
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 4px 2px 0 rgb(0 0 0 / 40%);
   box-sizing: content-box;
   height: 160px;
   margin: 40px 0 20px;
   width: 160px;
 }
 
-.profile-page > span {
+.profile__stars {
   margin-bottom: 40px;
-}
-
-.profile-page p {
-  margin-bottom: 20px;
-  text-align: center;
 }

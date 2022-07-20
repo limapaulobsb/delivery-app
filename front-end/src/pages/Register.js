@@ -7,7 +7,6 @@ import { MainContext } from '../context';
 import { useValidation } from '../hooks';
 import { InputGroup } from '../components';
 import logo from '../assets/logo_color_full.png';
-import '../styles/Login.css';
 
 function Register() {
   const { isLoading, register } = useContext(MainContext);
@@ -37,12 +36,16 @@ function Register() {
   };
 
   return (
-    <main className='login-page'>
+    <main className='login'>
       <img src={logo} alt='Logo' />
       <h1>Delivery App</h1>
       <form onSubmit={handleSubmit}>
-        <button type='button' className='absolute' onClick={() => navigate('/login')}>
-          <FontAwesomeIcon icon={faArrowLeft} className='icon' />
+        <button
+          type='button'
+          className='login__go-back-button'
+          onClick={() => navigate('/login')}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
         </button>
         <h2>Cadastro</h2>
         <InputGroup label='Nome completo:' name='name' onChange={handleChange} />
@@ -59,7 +62,7 @@ function Register() {
           name='confirmation'
           onChange={handleChange}
         />
-        <button type='submit' className='gradient' disabled={!validation}>
+        <button type='submit' className='gradient-button' disabled={!validation}>
           {isLoading ? <div className='loader' /> : 'Cadastrar'}
         </button>
       </form>

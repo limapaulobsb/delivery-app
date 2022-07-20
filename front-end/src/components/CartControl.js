@@ -54,7 +54,7 @@ function CartControl({ product }) {
     return (
       <button
         type='button'
-        className='classic'
+        className='classic-button'
         onClick={updateCart}
         disabled={
           (!existsInCart && quantity === 0) ||
@@ -72,7 +72,7 @@ function CartControl({ product }) {
       <div>
         <button
           type='button'
-          className='control'
+          className='control-button'
           onClick={() => setQuantity(quantity - 1)}
           disabled={quantity === 0}
         >
@@ -81,7 +81,7 @@ function CartControl({ product }) {
         <input type='number' value={quantity} min={0} onChange={handleChange} />
         <button
           type='button'
-          className='control'
+          className='control-button'
           onClick={() => setQuantity(quantity + 1)}
         >
           <FontAwesomeIcon icon={faPlus} />

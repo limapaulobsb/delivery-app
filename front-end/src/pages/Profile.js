@@ -22,7 +22,7 @@ function Profile() {
   });
 
   const navigate = useNavigate();
-  
+
   const { name, email, password, confirmation } = inputs;
 
   const validations = useValidation([
@@ -73,10 +73,12 @@ function Profile() {
       <section>
         <h3>Deletar conta</h3>
         <p>Nós ficaremos muito tristes em ver você partir. &#128533;</p>
+        <br />
         <p>Lembre-se de que este processo é irreversível.</p>
+        <br />
         <button
           type='button'
-          className='gradient'
+          className='gradient-button'
           onClick={() => {
             setConfirmFn(() => handleDelete);
             setShowModal(true);
@@ -113,7 +115,7 @@ function Profile() {
             value={confirmation}
             onChange={handleChange}
           />
-          <button type='submit' className='gradient' disabled={!validations[1]}>
+          <button type='submit' className='gradient-button' disabled={!validations[1]}>
             Alterar
           </button>
         </form>
@@ -144,7 +146,7 @@ function Profile() {
             value={email}
             onChange={handleChange}
           />
-          <button type='submit' className='gradient' disabled={!validations[0]}>
+          <button type='submit' className='gradient-button' disabled={!validations[0]}>
             Alterar
           </button>
         </form>
@@ -154,11 +156,13 @@ function Profile() {
 
   // Main render
   return (
-    <main className='profile-page'>
+    <main className='profile'>
       <Header />
       <img src={gravatarURL} alt='Imagem do perfil' />
       <h4>{user.name}</h4>
-      <span>&#127775; &#127775; &#127775; &#127775; &#127775;</span>
+      <span className='profile__stars'>
+        &#127775; &#127775; &#127775; &#127775; &#127775;
+      </span>
       {renderUpdateSection()}
       {renderPasswordSection()}
       {renderDeleteSection()}

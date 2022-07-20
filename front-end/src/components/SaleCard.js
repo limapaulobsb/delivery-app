@@ -8,12 +8,12 @@ import '../styles/SaleCard.css';
 function SaleCard({ sale: { id, totalPrice, date, status } }) {
   const navigate = useNavigate();
 
-  let bgColor = 'blue';
+  let bgColor = 'bg-blue';
 
   if (status === 'Pendente') {
-    bgColor = 'yellow';
+    bgColor = 'bg-yellow';
   } else if (status === 'Entregue') {
-    bgColor = 'green';
+    bgColor = 'bg-green';
   }
 
   return (
@@ -26,10 +26,10 @@ function SaleCard({ sale: { id, totalPrice, date, status } }) {
     >
       <div>{id.toString().padStart(4, '0')}</div>
       <div>
-        <div className={`sale-status ${bgColor}`}>{status}</div>
+        <div className={`sale-card__status ${bgColor}`}>{status}</div>
         <div>
-          <div className='sale-date'>{new Date(date).toLocaleDateString('pt-BR')}</div>
-          <div className='sale-total'>
+          <div className='sale-card__date'>{new Date(date).toLocaleDateString('pt-BR')}</div>
+          <div className='sale-card__total'>
             <PriceTag price={totalPrice} />
           </div>
         </div>

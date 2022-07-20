@@ -21,29 +21,29 @@ function Header() {
 
   return (
     <header>
-      <div className='nav-bar'>
+      <div className='header__nav-bar'>
         <div>
-          <div className='logo-container'>
+          <div className='header__logo-container'>
             <img src={logo} alt='Logo' />
           </div>
           <h2>Delivery App</h2>
         </div>
         <nav>
-          <NavLink to='/sellers' className='nav-link'>
+          <NavLink to='/sellers' className='header__nav-link'>
             Produtos
           </NavLink>
-          <NavLink to='/orders' className='nav-link'>
+          <NavLink to='/orders' className='header__nav-link'>
             Pedidos
           </NavLink>
         </nav>
       </div>
-      <div className='aux-bar'>
+      <div className='header__aux-bar'>
         <div>
           <Link to='/profile'>
             <FontAwesomeIcon icon={faUserAlt} className='icon' />
             <span>{user.email}</span>
           </Link>
-          <button type='button' className='color red' onClick={logout}>
+          <button type='button' className='color-button--red' onClick={logout}>
             Sair
           </button>
         </div>
@@ -52,7 +52,7 @@ function Header() {
           <PriceTag price={cartTotal} />
           <button
             type='button'
-            className='color yellow'
+            className='color-button--yellow'
             onClick={() => navigate('/checkout')}
             disabled={cartTotal === 0}
           >

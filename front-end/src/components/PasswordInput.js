@@ -19,7 +19,7 @@ function PasswordInput({ name, onChange, value }) {
       />
       <button
         type='button'
-        className='absolute'
+        className='input-container__eye-button'
         onClick={() => setShowPassword(!showPassword)}
       >
         <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />

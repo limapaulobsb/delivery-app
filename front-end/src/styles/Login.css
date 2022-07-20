@@ -1,31 +1,32 @@
-.login-page {
+.login {
   background-color: var(--dark-purple);
   padding-top: 40px;
 }
 
-.login-page > img {
-  height: 180px;
-  margin-bottom: 20px;
-}
-
-.login-page > form {
+.login > form {
   background-color: white;
   border-radius: 8px;
   padding: 60px;
   position: relative;
 }
 
-.login-page > form > .absolute {
+.login > img {
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+}
+
+.login__go-back-button {
   font-size: 1.75rem;
   left: 20px;
+  position: absolute;
   top: 20px;
 }
 
-.login-page > form > span {
+.login__text {
   margin-left: auto;
   text-decoration: line-through;
-}
-
-.login-page h2 {
-  margin-bottom: 20px;
 }
