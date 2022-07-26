@@ -1,3 +1,14 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "rules": {
+    "comment-empty-line-before": null,
+    "no-descending-specificity": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ],
+    "selector-class-pattern": null,
+    "property-no-vendor-prefix": null
+  }
 }
